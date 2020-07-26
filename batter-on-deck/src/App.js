@@ -59,10 +59,11 @@ function fetchPlayer(id){
   });
 }
 
-for(var i=0; i < 10;i++){
-  fetchPlayer(i);
-}
+// for(var i=1; i < 10;i++){
+//   fetchPlayer(i);
+// }
 
+fetchPlayer(493227);
 export default App;
 
 // ======== TO USE LATER ===========
