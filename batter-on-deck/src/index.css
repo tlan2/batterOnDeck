@@ -12,7 +12,23 @@ code {
     monospace;
 }
 
-.backblue{
-  background-color: navy;
-  color: white;
+
+
+
+
+.navbar{
+ flex-direction: row;
+ align-items: flex-end;
+ background-color: navy;
+ color: white;
+  width: 100%;
+  font: 'Roboto';
+  text-align: center;
+  padding: .3%;
 }
+
+.navbar-brand{
+  width: 25%
+}  
+
+
