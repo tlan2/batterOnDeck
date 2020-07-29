@@ -17,18 +17,21 @@ code {
 
 
 .navbar{
- flex-direction: row;
- align-items: flex-end;
- background-color: navy;
+ 
+ background-color: rgb(51, 67, 116);
  color: white;
-  width: 100%;
-  font: 'Roboto';
-  text-align: center;
-  padding: .3%;
+
+
 }
 
-.navbar-brand{
-  width: 25%
-}  
+li{
+  padding: 2px;
+  align-content: flex-end;
+}
 
+
+
+.dropdown-item{
+  color: greenyellow;
+}
 

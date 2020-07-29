@@ -14,57 +14,93 @@ Batter On Deck - home.html
       href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
     />
     <link rel="stylesheet" href="index.css" />
-
-  </head>
-  <body class="bg-info">
-    <nav class="navbar navbar-expand-lg">
-  
-      
-          <a class="navbar-brand" href="#">
-            <img alt="Brand" src="main_logo.png" width="50%" class="d-inline-block align-top"></img>
-          </a>
-         
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
- 
-          <form class="form-inline">
-
-            <input class="form-control mr-sm-2" type="search" placeholder="Search for Player" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
-          </ul>
-        
-         
-        </div>
-          
-          
-        
-    </nav>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+      <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+      <link href="style.css" rel="stylesheet">
+      <link rel="stylesheet" href="https://m.w3newbie.com/you-tube.css">
+    </head>
+    </head>
+    <body>
    
-    <section class="container border rounded bg-light w-50 mx-auto mt-5 p-3">
-      <h2 class="mt-2 mb-4">MLB Data API Player & IDs</h2>
-      <ul id="results"></ul>
-    </section>
-    <script src="home.js"></script>
-  </body>
-</html>
+    <nav class="navbar navbar-dark navbar-expand-md sticky-top">
+     
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img src="main_logo.png" width = "50%"></a>
+         <button class ="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+          <span class="navbar-toggler-icon"></span>
+     </button> 
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class = "navbar-nav ml-auto">
+          
+               <li class="nav-item active">
+                <a class="nav-link" href="#"></a>
+              </li>
+               <li class="nav-item">
+               <div class="dropdown">
+       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria>
+         About
+       </button>
+       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+         <a class="dropdown-item" href="#">Action</a>
+         <a class="dropdown-item" href="#">Another action</a>
+         <a class="dropdown-item" href="#">Something else here</a>
+       </div>
+     </div>
+    </li>
+    <li class="nav-item">
+      <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  About
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+  <a class="dropdown-item" href="#">Action</a>
+  <a class="dropdown-item" href="#">Another action</a>
+  <a class="dropdown-item" href="#">Something else here</a>
+  </div>
+  </div>
+  </li>
+  <li class="nav-item">
+    <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  About
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+  <a class="dropdown-item" href="#">Action</a>
+  <a class="dropdown-item" href="#">Another action</a>
+  <a class="dropdown-item" href="#">Something else here</a>
+  </div>
+  </div>
+  </li>
+  <li class="nav-item">
+    <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  About
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+  <a class="dropdown-item" href="#">Action</a>
+  <a class="dropdown-item" href="#">Another action</a>
+  <a class="dropdown-item" href="#">Something else here</a>
+  </div>
+  </div>
+  </li>
+  </div>
+          </ul> 
+     
+       
+          </div>
+        </div>
+      </div>
+          </nav>
+       
+    
+     
+     <!--- <section class="container border rounded bg-light w-50 mx-auto mt-5 p-3">
+        <h2 class="mt-2 mb-4">MLB Data API Player & IDs</h2>
+        <ul id="results"></ul>
+      </section>
+      <script src="home.js"></script> -->
+    </body>
+  </html>
