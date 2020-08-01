@@ -1,0 +1,20 @@
+.navbar{
+ 
+    background-color: rgb(51, 67, 116);
+    color: white;
+   
+   
+   }
+   
+   li{
+     padding: 2px;
+     align-content: flex-end;
+   }
+   
+   
+   
+   .dropdown-item{
+     background-color: grey;
+     color: greenyellow;
+   }
+   
