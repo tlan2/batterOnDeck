@@ -1,4 +1,8 @@
-function fetchPlayer(id){
+// Tom Lancaster & Pat Rademacher (c) 2020
+// Batter On Deck
+// function.js
+
+function fetchPlayerByID(id){
 
     fetch(`https://mlb-data.p.rapidapi.com/json/named.player_info.bam?sport_code='mlb'&player_id='${id}'`, {
       "method": "GET",
@@ -30,9 +34,5 @@ function fetchPlayer(id){
     });
   }
 
-
-  for(var i=401000; i < 401010; i++){
-    fetchPlayer(i);
-  }
 
 
