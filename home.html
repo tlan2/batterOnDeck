@@ -24,70 +24,105 @@ home.html
   <body>
     <nav class="navbar navbar-dark navbar-expand-md sticky-top">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img src="images/main_logo.png" width = "50%"></a>
-         <button class ="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-              <span class="navbar-toggler-icon"></span>
-          </button> 
-          <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class = "navbar-nav ml-auto">
-          
-               <li class="nav-item active">
-                <a class="nav-link" href="#"></a>
-              </li>
-               <li class="nav-item">
-               <div class="dropdown">
-       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria>
-         About
-       </button>
-       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-         <a class="dropdown-item" href="#">App</a>
-         <a class="dropdown-item" href="#">Another action</a>
-         <a class="dropdown-item" href="#">Something else here</a>
-       </div>
-     </div>
-    </li>
-    <li class="nav-item">
-      <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Players
-          </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Season</a>
-            <a class="dropdown-item" href="#">Career</a>
-            </div>
-      </div>
-    </li>
-    <li class="nav-item">
-        <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Teams
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-        </div>
-    </li>
-    <li class="nav-item">
-        <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Leagues
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" href="#">American League</a>
-      <a class="dropdown-item" href="#">National League</a>
-      </div>
-      </div>
-    </li>
-    </div>
-  </nav>
-  
-      <section class="container border rounded bg-light w-50 mx-auto mt-5 p-3">
-        <h2 class="mt-2 mb-4">MLB Player Info</h2>
-        <ul id="results"></ul>
-      </section>
+        <a class="navbar-brand" href="#"><img src="images/logo1.png" width = "50%"></a>
 
-      <script src="javascript/fetchPlayerByName.js"></script>
-    </body>
-  </html>
+        <div class="flex-grow-1 d-flex">
+          <form class="form-inline flex-nowrap bg-light mx-0 mx-lg-auto rounded p-1">
+              <input class="form-control mr-sm-2" id="getPlayer" type="search" placeholder="Search by Player Name" aria-label="Search">
+              <button class="btn btn-default" type="submit" onclick="searchByPlayerName(event)">
+                <i class="fa fa-search"></i>
+              </button>
+          </form>
+      </div>
+
+        <button class ="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+          <span class="navbar-toggler-icon"></span>
+        </button> 
+
+        <!-- <div class="col-sm-3 col-md-3 pull-right" id="search">
+          <form class="navbar-form" role="search" >
+          <div class="input-group" >
+            <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
+            <div class="input-group-btn">
+              <button class="btn btn-default" type="submit">
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+          </div>
+          </form>
+          </div> -->
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class = "navbar-nav ml-auto">     
+            <li class="nav-item active">
+              <a class="nav-link" href="#"></a>
+            </li>
+            <li class="nav-item">
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria>
+                  About
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#">App</a>
+                  <a class="dropdown-item" href="#">BoD Creaters</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Players
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#">Season</a>
+                  <a class="dropdown-item" href="#">Career</a>
+                </div>
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Teams
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Leagues
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#">American League</a>
+                  <a class="dropdown-item" href="#">National League</a>
+                </div>
+              </div>
+            </li>
+          </ul>
+            
+        </div>
+      </nav>
+
+
+      <div id="nameResult"></div>
+
+
+
+
+    <script src="javascript/functions.js"></script>
+  </body>
+</html>
+
+
+<!-- <div class="col-sm-3 col-md-3">
+  <form class="navbar-form" role="search">
+  <div class="input-group">
+    <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
+    <div class="input-group-btn">
+      <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+    </div> -->

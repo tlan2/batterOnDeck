@@ -1,20 +1,27 @@
 .navbar{
- 
-    background-color: rgb(51, 67, 116);
+    /* background-color: rgb(51, 67, 116); */
+    background-color: #083b66;
     color: white;
+}
+
+#search{
+  /* display: block;
+  align-content: center; */
+  /* padding-left: 40%; */
+  width: 20%;
+}
    
-   
-   }
-   
-   li{
+li{
      padding: 2px;
      align-content: flex-end;
-   }
+}
    
-   
-   
-   .dropdown-item{
+.dropdown-item{
      background-color: grey;
      color: greenyellow;
-   }
+}
+
+#name {
+  text-align: center;
+}
    

@@ -2,6 +2,14 @@
 // Batter On Deck
 // functions.js
 
+function searchByPlayerName(event){
+  document.getElementById('nameResult').innerHTML = "";
+   var inputPlayer = document.getElementById('getPlayer').value;
+   console.log(inputPlayer);
+   fetchPlayerByName(inputPlayer);
+   event.preventDefault();
+}
+
 function fetchPlayerByName(name){
 
     var urlName = convertToURlName(name);
@@ -24,12 +32,12 @@ function fetchPlayerByName(name){
             const name = data.search_player_all.queryResults.row.name_display_first_last;
             const position = data.search_player_all.queryResults.row.position;
     
-            const html = `<li>${name}-${position}</li>`;
+            const player = `<h1 id="name">${name} - ${position}</h1>`;
 
             console.log(name);
             console.log(position);
     
-            document.getElementById('results').insertAdjacentHTML('beforebegin', html);
+            document.getElementById('nameResult').insertAdjacentHTML('beforebegin', player);
     })
     .catch(err => {
       console.log(err);
@@ -101,7 +109,8 @@ var activePlayers = ["Mike Trout", "Mookie Betts", "Alex Bregman",
 //     fetchPlayerByName(p, 'N')
 // }
 
-fetchPlayerByName("aaron judge");
+// searchPlayerName();
+// fetchPlayerByName("aaron judge");
 // fetchPlayerByID(592450);
 
 
