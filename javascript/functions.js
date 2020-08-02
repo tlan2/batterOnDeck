@@ -28,15 +28,8 @@ function fetchPlayerInfo(name){
             console.log("data", data)
 
             if(data.search_player_all.queryResults.totalSize == 0){
-              var i = Math.floor(Math.random() * 4) + 1;
-              console.log("random # = " + i);
-              var missing = ["1.jpg", "2.jpg", "3.jpg", "4.jpg"];
-              console.log("missing[i+1] = " + missing[i+1]);
-              var html = `<h1 id="name">Player Does Not Exist.</h1>
-                          <br>
-                          <br>
-                          <img src="images/missing/${missing[i+1]}" id="missing" alt="Player Does Not Exist">`;
-              document.getElementById('nameResult').innerHTML = html;
+              document.getElementById('nameResult').innerHTML = playerDoesNotExist();
+              return;
             }
   
             //INSERT CODE HERE
@@ -78,13 +71,27 @@ function playerDoesNotExist(){
   var i = Math.floor(Math.random() * 4) + 1;
   console.log("random # = " + i);
   var missing = ["1.jpg", "2.jpg", "3.jpg", "4.jpg"];
-  console.log("missing[i+1] = " + missing[i+1]);
-  var img = `<h1 id="name">Player Does Not Exist.</h1>
-                <br>
-                <br>
-                <img src="images/missing/${missing[i+1]} id="missing" alt="Player Does Not Exist.">`;
+  console.log("missing[i+1] = " + missing[i-1]);
+  var subheader;
+  var j = i-1
+  
+  if(j == 0){
+    subheader = "<h2 id=\"name\">Hey, it could be worse.</h2>"
+  } else if(j == 1){
+    subheader = "<h2 id=\"name\">Maybe they've gone missing.</h2>"
+  } else if(j == 2){
+    subheader = "<h2 id=\"name\">There are plenty of wannabes out there though.</h2>"
+  } else if(j == 3){
+    subheader = "<h2 id=\"name\">Sorry to break it to you.</h2>"
+  }
+  var html = `<h1 id="name">Player Does Not Exist.</h1>
+              <br>
+              ${subheader}
+              <br>
+              <br>
+              <img src="images/missing/${missing[i-1]}" id="missing" alt="Player Does Not Exist">`;
 
-  return img;
+  return html;
 }
   
 function fetchPlayerByID(id){

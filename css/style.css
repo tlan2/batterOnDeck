@@ -24,4 +24,11 @@ li{
 #name {
   text-align: center;
 }
+
+#missing {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
    
