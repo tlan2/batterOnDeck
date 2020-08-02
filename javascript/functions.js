@@ -6,15 +6,15 @@ function searchByPlayerName(event){
    clearPlayerInfo();
    var inputPlayer = document.getElementById('getPlayer').value;
    console.log(inputPlayer);
-   fetchPlayerInfo(inputPlayer);
+   fetchAllPlayerInfo(inputPlayer);
    event.preventDefault();
 }
 
-function fetchPlayerInfo(name){
+function fetchAllPlayerInfo(name){
 
-    var urlName = convertToURlName(name);
+  var urlName = convertToURlName(name);
 
-    fetch(`https://mlb-data.p.rapidapi.com/json/named.search_player_all.bam?active_sw='Y'&sport_code='mlb'&name_part='${urlName}'`, {
+  fetch(`https://mlb-data.p.rapidapi.com/json/named.search_player_all.bam?active_sw='Y'&sport_code='mlb'&name_part='${urlName}'`, {
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-host": "mlb-data.p.rapidapi.com",
@@ -22,34 +22,153 @@ function fetchPlayerInfo(name){
 	}
     })
     .then(response => {
+      // console("response.json() = " + response.json());
       return response.json();
     })
     .then(function(data){
-            console.log("data", data)
+        console.log("data", data);
+        console.log("hasInfo", data.search_player_all.queryResults.totalSize)
 
-            if(data.search_player_all.queryResults.totalSize == 0){
-              document.getElementById('nameResult').innerHTML = playerDoesNotExist();
-              return;
+        if(data.search_player_all.queryResults.totalSize == 0){
+              var retired = fetchRetiredPlayerInfo(urlName);
+              if(!retired){
+                document.getElementById('nameResult').innerHTML = playerDoesNotExist();
+                return;
+              }
+        } else {
+                  const id = data.search_player_all.queryResults.row.player_id;
+                  const name = data.search_player_all.queryResults.row.name_display_first_last;
+                  const position = data.search_player_all.queryResults.row.position;
+          
+                  const player = `<h1 id="name">${name} - ${position}</h1>`;
+
+                  console.log(name);
+                  console.log(position);
+          
+                  document.getElementById('nameResult').innerHTML = player;
+
+                  fetchPlayerCareerStats(id);
             }
-  
-            //INSERT CODE HERE
-            const id = data.search_player_all.queryResults.row.player_id;
-            const name = data.search_player_all.queryResults.row.name_display_first_last;
-            const position = data.search_player_all.queryResults.row.position;
-    
-            const player = `<h1 id="name">${name} - ${position}</h1>`;
-
-            console.log(name);
-            console.log(position);
-    
-            document.getElementById('nameResult').innerHTML = player;
+            
     })
     .catch(err => {
       console.log(err);
     });
   }
 
-  // Searches inputted player when user presses "Enter"
+
+function fetchRetiredPlayerInfo(urlName){
+// Returns RETIRED players PERSONAL info including ID
+
+  fetch(`https://mlb-data.p.rapidapi.com/json/named.search_player_all.bam?active_sw='n'&sport_code='mlb'&name_part='${urlName}'`, {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "mlb-data.p.rapidapi.com",
+		"x-rapidapi-key": "99277645d6msh6f62f53f4354a9fp1bbe68jsnfe46c1d9dfb5"
+	}
+    })
+    .then(response => {
+      // console("response.json() = " + response.json());
+      return response.json();
+    })
+    .then(function(retiredData){
+        console.log("retiredData", retiredData);
+
+        if(retiredData.search_player_all.queryResults.totalSize == 0){
+              return false;
+            } else {
+                  console.log("Retired Player stats retrieval.")
+                  const id = data.search_player_all.queryResults.row.player_id;
+                  const name = data.search_player_all.queryResults.row.name_display_first_last;
+                  const position = data.search_player_all.queryResults.row.position;
+          
+                  const player = `<h1 id="name">${name} - ${position}</h1>`;
+
+                  console.log(name);
+                  console.log(position);
+          
+                  document.getElementById('nameResult').innerHTML = player;
+
+                  fetchPlayerCareerStats(id);
+            }
+            
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  }
+
+function fetchPlayerCareerStats(id){
+// Fetches player's CAREER REGULAR SEASON STATS
+fetch(`https://mlb-data.p.rapidapi.com/json/named.sport_career_hitting.bam?player_id='${id}'&game_type='R'&league_list_id='mlb'`, {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "mlb-data.p.rapidapi.com",
+		"x-rapidapi-key": "99277645d6msh6f62f53f4354a9fp1bbe68jsnfe46c1d9dfb5"
+	}
+  })
+  .then(response => {
+    return response.json();
+  })
+  .then(function(careerData){
+          console.log("careerData", careerData)
+
+          const hr = careerData.sport_career_hitting.queryResults.row.hr;
+          const avg = careerData.sport_career_hitting.queryResults.row.avg;
+          const rbi = careerData.sport_career_hitting.queryResults.row.rbi;
+          const slg = careerData.sport_career_hitting.queryResults.row.slg;
+          const obp = careerData.sport_career_hitting.queryResults.row.obp;
+          const r = careerData.sport_career_hitting.queryResults.row.r;
+          const sb = careerData.sport_career_hitting.queryResults.row.sb;
+          const so = careerData.sport_career_hitting.queryResults.row.so;
+          const bb = careerData.sport_career_hitting.queryResults.row.bb;
+
+          const html = `<div class="row">
+                          <div class="col-sm-4" id="homeRuns">
+                            Home Runs - ${hr}
+                          </div>
+                          <div class="col-sm-4" id="battingAvg">
+                            Batting Avg. - ${avg}
+                          </div>
+                          <div class="col-sm-4" id="rbi">
+                            Runs Batted In (RBI) - ${rbi}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-4" id="slg">
+                            Slugging Pct (SLG) - ${slg}
+                          </div>
+                          <div class="col-sm-4" id="obp">
+                            On Base Pct (OBP) - ${obp}
+                          </div>
+                          <div class="col-sm-4" id="runs">
+                            Runs (R) - ${r}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-4" id="steals">
+                            Steals (SB) - ${sb}
+                          </div>
+                          <div class="col-sm-4" id="strikeOuts">
+                            Strike Outs (SO) - ${so}
+                          </div>
+                          <div class="col-sm-4" id="walks">
+                            Walks (BB) - ${bb}
+                          </div>
+                        </div>`
+          
+        document.getElementById('stats').innerHTML = html;              
+  })
+  .catch(err => {
+    console.log(err);
+  });
+}
+
+//============================================================================
+//           SUB FUNCTIONS / HELPER FUNCTIONS
+//============================================================================
+
+// Searches inputted player when user presses "Enter"
   // https://stackoverflow.com/questions/12955222/how-to-trigger-html-button-when-you-press-enter-in-textbox
   document.querySelector("#nameResult").addEventListener("keyup", event => {
     if(event.key !== "Enter") return; // Use `.key` instead.
@@ -65,6 +184,7 @@ function convertToURlName(inputName){
 
 function clearPlayerInfo(){
   document.getElementById('nameResult').innerHTML = "";
+  document.getElementById('stats').innerHTML = "";
 }
 
 function playerDoesNotExist(){
@@ -73,9 +193,9 @@ function playerDoesNotExist(){
   var missing = ["1a.jpg", "2.jpg", "3.jpg", "4.jpg"];
   // var missing = ["1.jpg", "2a.jpg", "3a.jpg", "4a.jpg"];
   console.log("missing[i+1] = " + missing[i-1]);
+  
   var subheader;
   var j = i-1
-  
   if(j == 0){
     subheader = "<h5 id=\"name\">Hey, it could be worse.</h5>"
   } else if(j == 1){
@@ -94,8 +214,13 @@ function playerDoesNotExist(){
 
   return html;
 }
-  
+
+//============================================================================
+//           DEPRECATED?
+//============================================================================
+
 function fetchPlayerByID(id){
+// Provides more PERSONAL info the player including twitter handle
 
     fetch(`https://mlb-data.p.rapidapi.com/json/named.player_info.bam?sport_code='mlb'&player_id='${id}'`, {
       "method": "GET",
@@ -127,17 +252,5 @@ function fetchPlayerByID(id){
     });
   } 
 
-var retiredPlayers = ["greg maddux",  "pedro martinez", "john smoltz", 
-"damon","johnson",  "rivera",
-"martinez", "bench", "gehrig", 
-"hornsby", "wagner", "schmidt",
-  "williams", "mays", "ruth"];
-
-
-
-var activePlayers = ["Mike Trout", "Mookie Betts", "Alex Bregman",
-"Aroldis Chapman", "Francisco Lindor", "Jacob deGrom",
-"Buster Posey", "Jose Altuve", "Freddie Freeman",
-"Giancarlo Stanton"];
 
 
