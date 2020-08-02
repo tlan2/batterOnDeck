@@ -1,6 +1,6 @@
 // Tom Lancaster & Pat Rademacher (c) 2020
 // Batter On Deck
-// fetchPlayer.js
+// originalFetch.js
 
 
 function fetchPlayer(id){
