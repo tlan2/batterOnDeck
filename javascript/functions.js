@@ -70,24 +70,25 @@ function clearPlayerInfo(){
 function playerDoesNotExist(){
   var i = Math.floor(Math.random() * 4) + 1;
   console.log("random # = " + i);
-  var missing = ["1.jpg", "2.jpg", "3.jpg", "4.jpg"];
+  var missing = ["1a.jpg", "2.jpg", "3.jpg", "4.jpg"];
+  // var missing = ["1.jpg", "2a.jpg", "3a.jpg", "4a.jpg"];
   console.log("missing[i+1] = " + missing[i-1]);
   var subheader;
   var j = i-1
   
   if(j == 0){
-    subheader = "<h2 id=\"name\">Hey, it could be worse.</h2>"
+    subheader = "<h5 id=\"name\">Hey, it could be worse.</h5>"
   } else if(j == 1){
-    subheader = "<h2 id=\"name\">Maybe they've gone missing.</h2>"
+    subheader = "<h5 id=\"name\">Maybe they've gone missing.</h5>"
   } else if(j == 2){
-    subheader = "<h2 id=\"name\">There are plenty of wannabes out there though.</h2>"
+    subheader = "<h5 id=\"name\">There are plenty of wannabes out there though.</h5>"
   } else if(j == 3){
-    subheader = "<h2 id=\"name\">Sorry to break it to you.</h2>"
+    subheader = "<h5 id=\"name\">Sorry to break it to you.</h5>"
   }
-  var html = `<h1 id="name">Player Does Not Exist.</h1>
+  var html = `<br>
+              <h3 id="name">Player Does Not Exist.</h3>
               <br>
               ${subheader}
-              <br>
               <br>
               <img src="images/missing/${missing[i-1]}" id="missing" alt="Player Does Not Exist">`;
 
