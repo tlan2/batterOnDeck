@@ -3,14 +3,14 @@
 // functions.js
 
 function searchByPlayerName(event){
-  document.getElementById('nameResult').innerHTML = "";
+   clearPlayerInfo();
    var inputPlayer = document.getElementById('getPlayer').value;
    console.log(inputPlayer);
-   fetchPlayerByName(inputPlayer);
+   fetchPlayerInfo(inputPlayer);
    event.preventDefault();
 }
 
-function fetchPlayerByName(name){
+function fetchPlayerInfo(name){
 
     var urlName = convertToURlName(name);
 
@@ -26,9 +26,21 @@ function fetchPlayerByName(name){
     })
     .then(function(data){
             console.log("data", data)
+
+            if(data.search_player_all.queryResults.totalSize == 0){
+              var i = Math.floor(Math.random() * 4) + 1;
+              console.log("random # = " + i);
+              var missing = ["1.jpg", "2.jpg", "3.jpg", "4.jpg"];
+              console.log("missing[i+1] = " + missing[i+1]);
+              var html = `<h1 id="name">Player Does Not Exist.</h1>
+                          <br>
+                          <br>
+                          <img src="images/missing/${missing[i+1]}" id="missing" alt="Player Does Not Exist">`;
+              document.getElementById('nameResult').innerHTML = html;
+            }
   
             //INSERT CODE HERE
-            // const id = data.player_info.queryResults.row.player_id;
+            const id = data.search_player_all.queryResults.row.player_id;
             const name = data.search_player_all.queryResults.row.name_display_first_last;
             const position = data.search_player_all.queryResults.row.position;
     
@@ -37,7 +49,7 @@ function fetchPlayerByName(name){
             console.log(name);
             console.log(position);
     
-            document.getElementById('nameResult').insertAdjacentHTML('beforebegin', player);
+            document.getElementById('nameResult').innerHTML = player;
     })
     .catch(err => {
       console.log(err);
@@ -56,6 +68,23 @@ function convertToURlName(inputName){
     var urlName = inputName.toLowerCase().trim().replace(' ', '+');
     console.log(urlName);
     return urlName;
+}
+
+function clearPlayerInfo(){
+  document.getElementById('nameResult').innerHTML = "";
+}
+
+function playerDoesNotExist(){
+  var i = Math.floor(Math.random() * 4) + 1;
+  console.log("random # = " + i);
+  var missing = ["1.jpg", "2.jpg", "3.jpg", "4.jpg"];
+  console.log("missing[i+1] = " + missing[i+1]);
+  var img = `<h1 id="name">Player Does Not Exist.</h1>
+                <br>
+                <br>
+                <img src="images/missing/${missing[i+1]} id="missing" alt="Player Does Not Exist.">`;
+
+  return img;
 }
   
 function fetchPlayerByID(id){
@@ -90,11 +119,6 @@ function fetchPlayerByID(id){
     });
   } 
 
-  // var retiredPlayers = new Array("Greg Maddux",  "Pedro Martinez", "John Smoltz", 
-//                       "Johnny Damon","Randy Johnson",  "Mariano Rivera",
-//                       "Edgar Martinez", "Johnny Bench", "Lou Gehrig", 
-//                       "Rogers Hornsby", "Honus Wagner", "Mike Schmidt",
-//                         "Ted Williams", "Willie Mays", "Babe Ruth");
 var retiredPlayers = ["greg maddux",  "pedro martinez", "john smoltz", 
 "damon","johnson",  "rivera",
 "martinez", "bench", "gehrig", 
@@ -107,18 +131,5 @@ var activePlayers = ["Mike Trout", "Mookie Betts", "Alex Bregman",
 "Aroldis Chapman", "Francisco Lindor", "Jacob deGrom",
 "Buster Posey", "Jose Altuve", "Freddie Freeman",
 "Giancarlo Stanton"];
-
-
-// for (p of retiredPlayers){
-//     console.log(p);
-//     // var name = new Array(p.split(" "));
-//     // console.log(name);
-
-//     fetchPlayerByName(p, 'N')
-// }
-
-// searchPlayerName();
-// fetchPlayerByName("aaron judge");
-// fetchPlayerByID(592450);
 
 
