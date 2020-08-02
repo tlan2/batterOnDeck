@@ -27,14 +27,11 @@ function fetchAllPlayerInfo(name){
     })
     .then(function(data){
         console.log("data", data);
-        console.log("hasInfo", data.search_player_all.queryResults.totalSize)
+        console.log("Active totalSize = " + data.search_player_all.queryResults.totalSize)
 
         if(data.search_player_all.queryResults.totalSize == 0){
-              var retired = fetchRetiredPlayerInfo(urlName);
-              if(!retired){
-                document.getElementById('nameResult').innerHTML = playerDoesNotExist();
-                return;
-              }
+              console.log("Not active.")
+              fetchRetiredPlayerInfo(urlName);
         } else {
                   const id = data.search_player_all.queryResults.row.player_id;
                   const name = data.search_player_all.queryResults.row.name_display_first_last;
@@ -60,7 +57,9 @@ function fetchAllPlayerInfo(name){
 function fetchRetiredPlayerInfo(urlName){
 // Returns RETIRED players PERSONAL info including ID
 
-  fetch(`https://mlb-data.p.rapidapi.com/json/named.search_player_all.bam?active_sw='n'&sport_code='mlb'&name_part='${urlName}'`, {
+  console.log("retired player fetch.")
+
+  fetch(`https://mlb-data.p.rapidapi.com/json/named.search_player_all.bam?active_sw='N'&sport_code='mlb'&name_part='${urlName}'`, {
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-host": "mlb-data.p.rapidapi.com",
@@ -68,29 +67,34 @@ function fetchRetiredPlayerInfo(urlName){
 	}
     })
     .then(response => {
-      // console("response.json() = " + response.json());
       return response.json();
     })
-    .then(function(retiredData){
+    .then(function (retiredData){
         console.log("retiredData", retiredData);
+        var totalSize = retiredData.search_player_all.queryResults.totalSize;
+        console.log("Retired totalSize = " + totalSize);
+        console.log(typeof totalSize)
+      
+        if(totalSize == "0"){
+          console.log("in totalSize condition");
+          document.getElementById('nameResult').innerHTML = playerDoesNotExist();
+          return;
+        }
 
-        if(retiredData.search_player_all.queryResults.totalSize == 0){
-              return false;
-            } else {
-                  console.log("Retired Player stats retrieval.")
-                  const id = data.search_player_all.queryResults.row.player_id;
-                  const name = data.search_player_all.queryResults.row.name_display_first_last;
-                  const position = data.search_player_all.queryResults.row.position;
-          
-                  const player = `<h1 id="name">${name} - ${position}</h1>`;
+        console.log("Retired Player stats retrieval.");
+        const id = retiredData.search_player_all.queryResults.row.player_id;
+        console.log("id = " + id);
+        const name = retiredData.search_player_all.queryResults.row.name_display_first_last;
+        const position = retiredData.search_player_all.queryResults.row.position;
+  
+        const player = `<h1 id="name">${name} - ${position}</h1>`;
 
-                  console.log(name);
-                  console.log(position);
-          
-                  document.getElementById('nameResult').innerHTML = player;
-
-                  fetchPlayerCareerStats(id);
-            }
+        console.log(name);
+        console.log(position);
+  
+        document.getElementById('nameResult').innerHTML = player;
+  
+        fetchPlayerCareerStats(id);
             
     })
     .catch(err => {
@@ -178,7 +182,7 @@ fetch(`https://mlb-data.p.rapidapi.com/json/named.sport_career_hitting.bam?playe
 
 function convertToURlName(inputName){
     var urlName = inputName.toLowerCase().trim().replace(' ', '+');
-    console.log(urlName);
+    // console.log(urlName);
     return urlName;
 }
 
@@ -189,15 +193,15 @@ function clearPlayerInfo(){
 
 function playerDoesNotExist(){
   var i = Math.floor(Math.random() * 4) + 1;
-  console.log("random # = " + i);
-  var missing = ["1a.jpg", "2.jpg", "3.jpg", "4.jpg"];
+  // console.log("random # = " + i);
+  var missing = ["1.jpg", "2.jpg", "3.jpg", "4.jpg"];
   // var missing = ["1.jpg", "2a.jpg", "3a.jpg", "4a.jpg"];
-  console.log("missing[i+1] = " + missing[i-1]);
+  // console.log("missing[i+1] = " + missing[i-1]);
   
   var subheader;
   var j = i-1
   if(j == 0){
-    subheader = "<h5 id=\"name\">Hey, it could be worse.</h5>"
+    subheader = "<h5 id=\"name\">This is awkward....</h5>"
   } else if(j == 1){
     subheader = "<h5 id=\"name\">Maybe they've gone missing.</h5>"
   } else if(j == 2){
