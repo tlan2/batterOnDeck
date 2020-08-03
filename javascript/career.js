@@ -49,7 +49,7 @@ function fetchAllPlayerInfo(name){
           
                   document.getElementById('nameResult').innerHTML = player;
 
-                  fetchPlayerCareerStats(id);
+                  fetchPlayerCareerStats(id, position);
             }
             
     })

@@ -37,18 +37,18 @@ li{
 }
 
 #active {
-  background-color: whitesmoke;
-  /* text-align: center; */
+  /* background-color: whitesmoke; */
+  text-align: center;
 }
 
 #retired {
-  background-color: whitesmoke;
+  /* background-color: whitesmoke; */
   color: grey;
-  /* text-align: center; */
+  text-align: center;
 }
 
 #missing {
-  background-color: whitesmoke;
+  /* background-color: whitesmoke; */
   color: crimson;
   text-align: center;
 }
@@ -62,9 +62,10 @@ li{
 }
 
 #dropDownList {
-  display: inline-block;
-  text-align: left;
-  /* float: left; */
+  /* align-content: center;
+  display: inline-block; */
+  text-align: center;
+  /* float: center; */
 }
 
 .row > div {

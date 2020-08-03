@@ -11,6 +11,7 @@ function searchByPlayerName(event){
 }
 
 function fetchAllPlayerInfo(name){
+  // Retrieve player id, name, position, team
 
   var urlName = convertToURlName(name);
 
@@ -40,8 +41,12 @@ function fetchAllPlayerInfo(name){
                   const team = data.search_player_all.queryResults.row.team_full;
                   var firstYear = data.search_player_all.queryResults.row.pro_debut_date;
 
+                  var firstYear = firstYear.substring(0,4);
+
+                  console.log(firstYear)
+
                   var dropDownList = createDropDownList(firstYear);
-                  
+
 
                   var player = `  <div id = "playerInfo">
                                   <h1 id="active">${name} - ${position}</h1>
@@ -61,6 +66,7 @@ function fetchAllPlayerInfo(name){
       console.log(err);
     });
   }
+
 
 
 function fetchRetiredPlayerInfo(urlName){
@@ -92,51 +98,83 @@ function fetchRetiredPlayerInfo(urlName){
           console.log("More than 1 player with same name.");
 
           const id = retiredData.search_player_all.queryResults.row['0'].player_id;
-          const name = retiredData.search_player_all.queryResults.row['0'].name_display_first_last;
-          const position = retiredData.search_player_all.queryResults.row['0'].position;
-          const team = retiredData.search_player_all.queryResults.row['0'].team_full;
+          // const name = retiredData.search_player_all.queryResults.row['0'].name_display_first_last;
+          // const position = retiredData.search_player_all.queryResults.row['0'].position;
+          // const team = retiredData.search_player_all.queryResults.row['0'].team_full;
 
           console.log("first id of 2 players = " + id);
-          console.log("Retired name" + name);
-          console.log("Retired positon" + position);
+          // console.log("Retired name" + name);
+          // console.log("Retired positon" + position);
 
-          const player = `
-                          <h1 id="retired">${name} - ${position}</h1>
-                          <h2 id="retired">${team}</h2>
-                          <br>`;
+          // const player = `
+          //                 <h1 id="retired">${name} - ${position}</h1>
+          //                 <h2 id="retired">${team}</h2>
+          //                 <br>`;
 
-          document.getElementById('nameResult').innerHTML = player;
-          fetchPlayerSeasonStats(id, position);
+          // document.getElementById('nameResult').innerHTML = player;
+          fetchPlayerByID(id);
 
         } else {
           console.log("Retired Player stats retrieval.");
 
           const id = retiredData.search_player_all.queryResults.row.player_id;
-          const name = retiredData.search_player_all.queryResults.row.name_display_first_last;
-          const position = retiredData.search_player_all.queryResults.row.position;
-          const team = retiredData.search_player_all.queryResults.row.team_full;
+          // const name = retiredData.search_player_all.queryResults.row.name_display_first_last;
+          // const position = retiredData.search_player_all.queryResults.row.position;
+          // const team = retiredData.search_player_all.queryResults.row.team_full;
   
           console.log("retired id = " + id);
-          console.log("Retired name" + name);
-          console.log("Retired position " + position);
+          // console.log("Retired name" + name);
+          // console.log("Retired position " + position);
 
-          const player = `
-                          <h1 id="retired">${name} - ${position}</h1>
-                          <h2 id="retired">${team}</h2>
-                          <br>`;
+          // const player = `
+          //                 <h1 id="retired">${name} - ${position}</h1>
+          //                 <h2 id="retired">${team}</h2>
+          //                 <br>`;
           
-          document.getElementById('nameResult').innerHTML = player;
+          // document.getElementById('nameResult').innerHTML = player;
     
-          fetchPlayerSeasonStats(id, position);
+          fetchPlayerByID(id);
         }
-
-        
-            
+  
     })
     .catch(err => {
       console.log(err);
     });
   }
+
+function fetchPlayerByID(id){
+    // Provides ALL PERSONAL info the player including twitter handle
+    
+    fetch(`https://mlb-data.p.rapidapi.com/json/named.player_info.bam?sport_code='mlb'&player_id='${id}'`, {
+      "method": "GET",
+      "headers": {
+        "x-rapidapi-host": "mlb-data.p.rapidapi.com",
+        "x-rapidapi-key": "99277645d6msh6f62f53f4354a9fp1bbe68jsnfe46c1d9dfb5"
+      }
+    })
+    .then(response => {
+      return response.json();
+    })
+    .then(function(data){
+            console.log("fetchPlayerByID-data", data)
+            const name = data.player_info.queryResults.row.name_display_first_last;
+            const position = data.player_info.queryResults.row.primary_position_txt;
+            const team = data.player_info.queryResults.row.team_name;
+            const firstYear = data.player_info.queryResults.row.pro_debut_date;
+            const lastYear = data.player_info.queryResults.row.end_date;
+    
+            const html = `<h1 id="retired">${name} - ${position}</h1>
+                          <h2 id="retired">${team}</h2>
+                          <br>`;
+
+            var dropDownList = createDropDownList(firstYear, lastYear);
+    
+            document.getElementById('nameResult').innerHTML = html + dropDownList;
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  } 
 
 function fetchPlayerSeasonStats(id, position, year){
 // Fetches player's SEASON REGULAR SEASON STATS
@@ -155,7 +193,7 @@ if(position == "P"){
     return response.json();
   })
   .then(function(seasonData){
-          console.log("PITCHER careerData", seasonData)
+          console.log("PITCHER seasonData", seasonData)
 
           const games = seasonData.sport_career_pitching.queryResults.row.g;
           const wins = seasonData.sport_career_pitching.queryResults.row.w;
@@ -350,8 +388,6 @@ if(position == "P"){
       console.log(err);
     });
   }
-
-
 }
 
 //============================================================================
@@ -374,6 +410,7 @@ function convertToURlName(inputName){
 }
 
 function createDropDownList(startYear){
+    var firstYear = startYear.substring(0,4);
     var firstYear = parseInt(startYear);
     var currentYear = new Date().getFullYear();
     var yearDiff = currentYear - firstYear;
@@ -400,6 +437,37 @@ function createDropDownList(startYear){
                     </div>`;
     return html;
 }
+
+function createDropDownList(startYear, endYear){
+  var firstYear = startYear.substring(0,4);
+  var firstYear = parseInt(firstYear);
+  var lastYear = endYear.substring(0,4);
+  var lastYear = parseInt(lastYear);
+  var yearDiff = lastYear - firstYear;
+  console.log("Total # of years played: " + yearDiff);
+  
+  var html = `<div id="dropDownList">
+                <label for="season">Season:
+                <br>
+                <select id="season">`;
+
+  for(i=lastYear; i >= firstYear; i--){
+    console.log(i);
+    var option = `
+                  <option value="${i}">
+                  <label for="${i}">${i}</label>
+                  </option>
+                  `;
+    html += option;
+  }
+
+  html = html + `       </select>
+                      </label>
+                    </div>
+                  </div>`;
+  return html;
+}
+
 
 function clearPlayerInfo(){
   document.getElementById('nameResult').innerHTML = "";
@@ -431,42 +499,40 @@ function playerDoesNotExist(){
   return html;
 }
 
-//============================================================================
-//           DEPRECATED?
-//============================================================================
+function refetchSeasonStats(year){
+  var idPosition = pullInfoFromFile();
+  var idPosition = idPosition.split(",");
+  var id = idPosition[0];
+  var position = idPosition[1];
 
-function fetchPlayerByID(id){
-// Provides ALL PERSONAL info the player including twitter handle
+  console.log("id = " + id);
+  console.log("position = " + position);
 
-    fetch(`https://mlb-data.p.rapidapi.com/json/named.player_info.bam?sport_code='mlb'&player_id='${id}'`, {
-      "method": "GET",
-      "headers": {
-        "x-rapidapi-host": "mlb-data.p.rapidapi.com",
-        "x-rapidapi-key": "99277645d6msh6f62f53f4354a9fp1bbe68jsnfe46c1d9dfb5"
-      }
-    })
-    .then(response => {
-      return response.json();
-    })
-    .then(function(data){
-            console.log("data", data)
+  fetchPlayerSeasonStats(id, position, year);
+}
+
+function addInfoToFile(id, position){
+  const fs = require('fs');
   
-            //INSERT CODE HERE
-            const id = data.player_info.queryResults.row.player_id;
-            const name = data.player_info.queryResults.row.name_display_first_last;
-            const position = data.player_info.queryResults.row.primary_position_txt;
-    
-            const html = `<li>${id}-${name}-${position}</li>`;
+  var info = id + "," + position;
 
-            console.log(name);
-            console.log(position);
-    
-            document.getElementById('results').insertAdjacentHTML('beforebegin', html);
-    })
-    .catch(err => {
-      console.log(err);
-    });
-  } 
+  fs.writeFile('currentPlayerOnScreen.txt', info, (err) => { 
+      
+      console.log("Wrote to file successfully.");
+    // In case of a error throw err. 
+    if (err) throw err; 
+}) 
+}
 
-
+function pullInfoFromFile(){
+  const fs = require('fs')
+  fs.readFile('currentPlayerOnScreen.txt', 'utf-8', (err, data) => { 
+    if (err) throw err; 
+  
+    // Converting Raw Buffer to text 
+    // data using tostring function. 
+    console.log(data); 
+    return data;
+}) 
+}
 
