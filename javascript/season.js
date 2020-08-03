@@ -45,7 +45,7 @@ function fetchAllPlayerInfo(name){
 
                   console.log(firstYear)
 
-                  var dropDownList = createDropDownList(firstYear);
+                  var dropDownList = createDropDownListActive(firstYear);
 
 
                   var player = `  <div id = "playerInfo">
@@ -58,7 +58,15 @@ function fetchAllPlayerInfo(name){
           
                   document.getElementById('nameResult').innerHTML = player + dropDownList;
 
-                  fetchPlayerSeasonStats(id);
+                  var currentYear = new Date().getFullYear();
+                  fetchPlayerSeasonStats(id, position, currentYear.toString());
+
+                  const selectElement = document.getElementById("dropDownList");
+
+                  selectElement.addEventListener('change', (event) => {
+                    fetchPlayerSeasonStats(id, position, `${event.target.value}`);
+                  });
+                  
             }
             
     })
@@ -98,40 +106,18 @@ function fetchRetiredPlayerInfo(urlName){
           console.log("More than 1 player with same name.");
 
           const id = retiredData.search_player_all.queryResults.row['0'].player_id;
-          // const name = retiredData.search_player_all.queryResults.row['0'].name_display_first_last;
-          // const position = retiredData.search_player_all.queryResults.row['0'].position;
-          // const team = retiredData.search_player_all.queryResults.row['0'].team_full;
 
           console.log("first id of 2 players = " + id);
-          // console.log("Retired name" + name);
-          // console.log("Retired positon" + position);
-
-          // const player = `
-          //                 <h1 id="retired">${name} - ${position}</h1>
-          //                 <h2 id="retired">${team}</h2>
-          //                 <br>`;
-
-          // document.getElementById('nameResult').innerHTML = player;
+          
           fetchPlayerByID(id);
 
         } else {
           console.log("Retired Player stats retrieval.");
 
           const id = retiredData.search_player_all.queryResults.row.player_id;
-          // const name = retiredData.search_player_all.queryResults.row.name_display_first_last;
-          // const position = retiredData.search_player_all.queryResults.row.position;
-          // const team = retiredData.search_player_all.queryResults.row.team_full;
   
           console.log("retired id = " + id);
-          // console.log("Retired name" + name);
-          // console.log("Retired position " + position);
-
-          // const player = `
-          //                 <h1 id="retired">${name} - ${position}</h1>
-          //                 <h2 id="retired">${team}</h2>
-          //                 <br>`;
-          
-          // document.getElementById('nameResult').innerHTML = player;
+      
     
           fetchPlayerByID(id);
         }
@@ -157,19 +143,37 @@ function fetchPlayerByID(id){
     })
     .then(function(data){
             console.log("fetchPlayerByID-data", data)
+
+
+
             const name = data.player_info.queryResults.row.name_display_first_last;
             const position = data.player_info.queryResults.row.primary_position_txt;
             const team = data.player_info.queryResults.row.team_name;
-            const firstYear = data.player_info.queryResults.row.pro_debut_date;
-            const lastYear = data.player_info.queryResults.row.end_date;
+            var firstYear = data.player_info.queryResults.row.pro_debut_date;
+            var lastYear = data.player_info.queryResults.row.end_date;
+            firstYear = firstYear.substring(0,4);
+            lastYear = lastYear.substring(0,4);
+
+            console.log("retired-firstYear = " + firstYear);
+            console.log("retired-lastYear = " + lastYear);
+            console.log(typeof firstYear);
+            console.log(typeof lastYear);
     
             const html = `<h1 id="retired">${name} - ${position}</h1>
                           <h2 id="retired">${team}</h2>
-                          <br>`;
+                          `;
 
-            var dropDownList = createDropDownList(firstYear, lastYear);
+            var dropDownList = createDropDownListRetired(firstYear, lastYear);
     
             document.getElementById('nameResult').innerHTML = html + dropDownList;
+
+
+            fetchPlayerSeasonStats(id, position, lastYear);
+
+            const selectElement = document.getElementById("dropDownList");
+            selectElement.addEventListener('change', (event) => {
+              fetchPlayerSeasonStats(id, position, `${event.target.value}`);
+            });
     })
     .catch(err => {
       console.log(err);
@@ -182,7 +186,7 @@ console.log("position = " + position);
 
 if(position == "P"){
   console.log("PITCHER season stats");
-  fetch(`https://mlb-data.p.rapidapi.com/json/named.sport_hitting_tm.bam?season='${year}'&player_id='${id}'&league_list_id='mlb'&game_type='R'`, {
+  fetch(`https://mlb-data.p.rapidapi.com/json/named.sport_pitching_tm.bam?season='${year}'&player_id='${id}'&league_list_id='mlb'&game_type='R'`, {
 	        "method": "GET",
           "headers": {
           "x-rapidapi-host": "mlb-data.p.rapidapi.com",
@@ -195,20 +199,22 @@ if(position == "P"){
   .then(function(seasonData){
           console.log("PITCHER seasonData", seasonData)
 
-          const games = seasonData.sport_career_pitching.queryResults.row.g;
-          const wins = seasonData.sport_career_pitching.queryResults.row.w;
-          const losses = seasonData.sport_career_pitching.queryResults.row.l;
-          const winPct = seasonData.sport_career_pitching.queryResults.row.wpct;
-          const era = seasonData.sport_career_pitching.queryResults.row.era;
-          const gamesStarted = seasonData.sport_career_pitching.queryResults.row.gs;
-          const completeGames = seasonData.sport_career_pitching.queryResults.row.cg;
-          const shutouts = seasonData.sport_career_pitching.queryResults.row.sho;
-          const onBasePlusSlugging = seasonData.sport_career_pitching.queryResults.row.ops;
-          const battingAvg = seasonData.sport_career_pitching.queryResults.row.avg;
-          const kPer9 = seasonData.sport_career_pitching.queryResults.row.k9;
-          const strikeOuts = seasonData.sport_career_pitching.queryResults.row.so;
-          const innningsPitched = seasonData.sport_career_pitching.queryResults.row.ip;
-          const runsPer9 = seasonData.sport_career_pitching.queryResults.row.rs9;
+          document.getElementById('stats').innerHTML = "";
+
+          const games = seasonData.sport_pitching_tm.queryResults.row.g;
+          const wins = seasonData.sport_pitching_tm.queryResults.row.w;
+          const losses = seasonData.sport_pitching_tm.queryResults.row.l;
+          const winPct = seasonData.sport_pitching_tm.queryResults.row.wpct;
+          const era = seasonData.sport_pitching_tm.queryResults.row.era;
+          const gamesStarted = seasonData.sport_pitching_tm.queryResults.row.gs;
+          const completeGames = seasonData.sport_pitching_tm.queryResults.row.cg;
+          const shutouts = seasonData.sport_pitching_tm.queryResults.row.sho;
+          const onBasePlusSlugging = seasonData.sport_pitching_tm.queryResults.row.ops;
+          const battingAvg = seasonData.sport_pitching_tm.queryResults.row.avg;
+          const kPer9 = seasonData.sport_pitching_tm.queryResults.row.k9;
+          const strikeOuts = seasonData.sport_pitching_tm.queryResults.row.so;
+          const innningsPitched = seasonData.sport_pitching_tm.queryResults.row.ip;
+          const runsPer9 = seasonData.sport_pitching_tm.queryResults.row.rs9;
 
           const html = `<div class="row">
                           <div class="col-sm-4" id="games">
@@ -221,7 +227,7 @@ if(position == "P"){
                             Wins-Losses, Winning Pct
                             <br> 
                             <br>
-                            ${wins}-${losses},${winPct}
+                            ${wins}-${losses}-${winPct}
                           </div>
                           <div class="col-sm-4" id="era">
                             Earned Run Average (ERA)
@@ -309,17 +315,19 @@ if(position == "P"){
       return response.json();
     })
     .then(function(seasonData){
-            console.log("HITTER careerData", seasonData)
+            console.log("HITTER seasonData", seasonData)
 
-            const hr = seasonData.sport_career_hitting.queryResults.row.hr;
-            const avg = seasonData.sport_career_hitting.queryResults.row.avg;
-            const rbi = seasonData.sport_career_hitting.queryResults.row.rbi;
-            const slg = seasonData.sport_career_hitting.queryResults.row.slg;
-            const obp = seasonData.sport_career_hitting.queryResults.row.obp;
-            const r = seasonData.sport_career_hitting.queryResults.row.r;
-            const sb = seasonData.sport_career_hitting.queryResults.row.sb;
-            const so = seasonData.sport_career_hitting.queryResults.row.so;
-            const bb = seasonData.sport_career_hitting.queryResults.row.bb;
+            document.getElementById('stats').innerHTML = "";
+
+            const hr = seasonData.sport_hitting_tm.queryResults.row.hr;
+            const avg = seasonData.sport_hitting_tm.queryResults.row.avg;
+            const rbi = seasonData.sport_hitting_tm.queryResults.row.rbi;
+            const slg = seasonData.sport_hitting_tm.queryResults.row.slg;
+            const obp = seasonData.sport_hitting_tm.queryResults.row.obp;
+            const r = seasonData.sport_hitting_tm.queryResults.row.r;
+            const sb = seasonData.sport_hitting_tm.queryResults.row.sb;
+            const so = seasonData.sport_hitting_tm.queryResults.row.so;
+            const bb = seasonData.sport_hitting_tm.queryResults.row.bb;
 
             const html = `<div class="row">
                             <div class="col-sm-4" id="homeRuns">
@@ -409,8 +417,7 @@ function convertToURlName(inputName){
     return urlName;
 }
 
-function createDropDownList(startYear){
-    var firstYear = startYear.substring(0,4);
+function createDropDownListActive(startYear){
     var firstYear = parseInt(startYear);
     var currentYear = new Date().getFullYear();
     var yearDiff = currentYear - firstYear;
@@ -419,7 +426,7 @@ function createDropDownList(startYear){
     var html = `<div id="dropDownList">
                   <label for="season">Season:
                   <br>
-                  <select id="season">`;
+                  <select id="season">`; //onchange="refetchSeasonStats(this.value);"
 
     for(i=currentYear; i >= firstYear; i--){
       console.log(i);
@@ -438,11 +445,9 @@ function createDropDownList(startYear){
     return html;
 }
 
-function createDropDownList(startYear, endYear){
-  var firstYear = startYear.substring(0,4);
-  var firstYear = parseInt(firstYear);
-  var lastYear = endYear.substring(0,4);
-  var lastYear = parseInt(lastYear);
+function createDropDownListRetired(startYear, endYear){
+  var firstYear = parseInt(startYear);
+  var lastYear = parseInt(endYear);
   var yearDiff = lastYear - firstYear;
   console.log("Total # of years played: " + yearDiff);
   
@@ -499,40 +504,33 @@ function playerDoesNotExist(){
   return html;
 }
 
-function refetchSeasonStats(year){
-  var idPosition = pullInfoFromFile();
-  var idPosition = idPosition.split(",");
-  var id = idPosition[0];
-  var position = idPosition[1];
+// function refetchSeasonStats(year){
 
-  console.log("id = " + id);
-  console.log("position = " + position);
+//   fetchPlayerSeasonStats(id, position, year);
+// }
 
-  fetchPlayerSeasonStats(id, position, year);
-}
-
-function addInfoToFile(id, position){
-  const fs = require('fs');
+// function addInfoToFile(id, position){
+//   const fs = require('fs');
   
-  var info = id + "," + position;
+//   var info = id + "," + position;
 
-  fs.writeFile('currentPlayerOnScreen.txt', info, (err) => { 
+//   fs.writeFile('currentPlayerOnScreen.txt', info, (err) => { 
       
-      console.log("Wrote to file successfully.");
-    // In case of a error throw err. 
-    if (err) throw err; 
-}) 
-}
+//       console.log("Wrote to file successfully.");
+//     // In case of a error throw err. 
+//     if (err) throw err; 
+// }) 
+// }
 
-function pullInfoFromFile(){
-  const fs = require('fs')
-  fs.readFile('currentPlayerOnScreen.txt', 'utf-8', (err, data) => { 
-    if (err) throw err; 
+// function pullInfoFromFile(){
+//   const fs = require('fs')
+//   fs.readFile('currentPlayerOnScreen.txt', 'utf-8', (err, data) => { 
+//     if (err) throw err; 
   
-    // Converting Raw Buffer to text 
-    // data using tostring function. 
-    console.log(data); 
-    return data;
-}) 
-}
+//     // Converting Raw Buffer to text 
+//     // data using tostring function. 
+//     console.log(data); 
+//     return data;
+// }) 
+// }
 
