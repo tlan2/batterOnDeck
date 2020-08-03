@@ -1,6 +1,6 @@
 // Tom Lancaster & Pat Rademacher (c) 2020
 // Batter On Deck
-// functions.js
+// career.js
 
 function searchByPlayerName(event){
    clearPlayerInfo();
@@ -37,8 +37,12 @@ function fetchAllPlayerInfo(name){
                   const id = data.search_player_all.queryResults.row.player_id;
                   const name = data.search_player_all.queryResults.row.name_display_first_last;
                   const position = data.search_player_all.queryResults.row.position;
+                  const team = data.search_player_all.queryResults.row.team_full;
           
-                  const player = `<h1 id="active">${name} - ${position}</h1>`;
+                  const player = `
+                                  <h1 id="active">${name} - ${position}</h1>
+                                  <h2 id="active">${team}</h2>
+                                  <br>`;
 
                   console.log(name);
                   console.log(position);
@@ -86,12 +90,17 @@ function fetchRetiredPlayerInfo(urlName){
           const id = retiredData.search_player_all.queryResults.row['0'].player_id;
           const name = retiredData.search_player_all.queryResults.row['0'].name_display_first_last;
           const position = retiredData.search_player_all.queryResults.row['0'].position;
+          const team = retiredData.search_player_all.queryResults.row['0'].team_full;
 
           console.log("first id of 2 players = " + id);
           console.log("Retired name" + name);
           console.log("Retired positon" + position);
 
-          const player = `<h1 id="retired">${name} - ${position}</h1>`;
+          const player = `
+                          <h1 id="retired">${name} - ${position}</h1>
+                          <h2 id="retired">${team}</h2>
+                          <br>`;
+
           document.getElementById('nameResult').innerHTML = player;
           fetchPlayerCareerStats(id, position);
 
@@ -101,12 +110,17 @@ function fetchRetiredPlayerInfo(urlName){
           const id = retiredData.search_player_all.queryResults.row.player_id;
           const name = retiredData.search_player_all.queryResults.row.name_display_first_last;
           const position = retiredData.search_player_all.queryResults.row.position;
+          const team = retiredData.search_player_all.queryResults.row.team_full;
   
           console.log("retired id = " + id);
           console.log("Retired name" + name);
           console.log("Retired position " + position);
 
-          const player = `<h1 id="retired">${name} - ${position}</h1>`;
+          const player = `
+                          <h1 id="retired">${name} - ${position}</h1>
+                          <h2 id="retired">${team}</h2>
+                          <br>`;
+          
           document.getElementById('nameResult').innerHTML = player;
     
           fetchPlayerCareerStats(id, position);
@@ -156,45 +170,82 @@ if(position == "P"){
 
           const html = `<div class="row">
                           <div class="col-sm-4" id="games">
-                            Games - ${games}
+                            Games
+                            <br>
+                            <br>
+                            ${games}
                           </div>
                           <div class="col-sm-4" id="wpct">
-                            Wins-Losses-Win Pct - ${wins}-${losses}-${winPct}
+                            Wins-Losses, Winning Pct
+                            <br> 
+                            <br>
+                            ${wins}-${losses},${winPct}
                           </div>
                           <div class="col-sm-4" id="era">
-                            Earned Run Average (ERA) - ${era}
+                            Earned Run Average (ERA)
+                            <br>
+                            <br>
+                            ${era}
                           </div>
                         </div>
                         <div class="row">
                           <div class="col-sm-4" id="ops">
-                            On-base Slugging Pct - ${onBasePlusSlugging}
+                            On-base Slugging Pct
+                            <br>
+                            <br>
+                            ${onBasePlusSlugging}
                           </div>
                           <div class="col-sm-4" id="avg">
-                            Opponent Batting Avg. (AVG) - ${battingAvg}
+                            Opponent Batting Avg. (AVG)
+                            <br>
+                            <br>
+                            ${battingAvg}
                           </div>
                           <div class="col-sm-4" id="runsPer9">
-                            Runs Per 9-Innings (rs9) - ${runsPer9}
+                            Runs Per 9-Innings (rs9)
+                            <br>
+                            <br>
+                            ${runsPer9}
                           </div>
                         </div>
                         <div class="row">
                           <div class="col-sm-4" id="games">
-                            Games Started (GS) - ${gamesStarted}
+                            Games Started (GS)
+                            <br>
+                            <br>
+                            ${gamesStarted}
                           </div>
                           <div class="col-sm-4" id="completeGames">
-                            Complete Games (CG) - ${completeGames}
+                            Complete Games (CG)
+                            <br>
+                            <br>
+                            ${completeGames}
                           </div>
                           <div class="col-sm-4" id="shutOuts">
-                            Shut Outs (SHO) - ${shutouts}
+                            Shut Outs (SHO)
+                            <br>
+                            <br>
+                            ${shutouts}
                           </div>
+                        </div>
                           <div class="row">
                           <div class="col-sm-4" id="inningsPitched">
-                            Innings Pitched (IP) - ${innningsPitched}
+                            Innings Pitched (IP)
+                            <br>
+                            <br>
+                            ${innningsPitched}
                           </div>
                           <div class="col-sm-4" id="strikeOuts">
-                            Strike Outs (SO) - ${strikeOuts}
+                            Strike Outs (SO)
+                            <br>
+                            <br>
+                            ${strikeOuts}
                           </div>
                           <div class="col-sm-4" id="kPer9">
-                            Strike Outs Per 9-Innings (k9) - ${kPer9}
+                            Strike Outs Per 9-Innings (k9)
+                            <br>
+                            <br>
+                            ${kPer9}
                           </div>
                         </div>`
           
@@ -230,35 +281,62 @@ if(position == "P"){
 
             const html = `<div class="row">
                             <div class="col-sm-4" id="homeRuns">
-                              Home Runs - ${hr}
+                              Home Runs
+                              <br>
+                              <br>
+                              ${hr}
                             </div>
                             <div class="col-sm-4" id="battingAvg">
-                              Batting Avg. - ${avg}
+                              Batting Avg.
+                              <br>
+                              <br>
+                              ${avg}
                             </div>
                             <div class="col-sm-4" id="rbi">
-                              Runs Batted In (RBI) - ${rbi}
+                              Runs Batted In (RBI)
+                              <br>
+                              <br>
+                              ${rbi}
                             </div>
                           </div>
                           <div class="row">
                             <div class="col-sm-4" id="slg">
-                              Slugging Pct (SLG) - ${slg}
+                              Slugging Pct (SLG)
+                              <br>
+                              <br>
+                              ${slg}
                             </div>
                             <div class="col-sm-4" id="obp">
-                              On Base Pct (OBP) - ${obp}
+                              On Base Pct (OBP)
+                              <br>
+                              <br>
+                              ${obp}
                             </div>
                             <div class="col-sm-4" id="runs">
-                              Runs (R) - ${r}
+                              Runs (R)
+                              <br>
+                              <br>
+                              ${r}
                             </div>
                           </div>
                           <div class="row">
                             <div class="col-sm-4" id="steals">
-                              Steals (SB) - ${sb}
+                              Steals (SB)
+                              <br>
+                              <br>
+                              ${sb}
                             </div>
                             <div class="col-sm-4" id="strikeOuts">
-                              Strike Outs (SO) - ${so}
+                              Strike Outs (SO)
+                              <br>
+                              <br>
+                              ${so}
                             </div>
                             <div class="col-sm-4" id="walks">
-                              Walks (BB) - ${bb}
+                              Walks (BB)
+                              <br>
+                              <br>
+                              ${bb}
                             </div>
                           </div>`
             

@@ -1,3 +1,10 @@
+/* body{
+  background-image: url('/BatterOnDeck/images/background.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;  
+  background-size: cover;
+} */
+
 .navbar{
     /* background-color: rgb(51, 67, 116); */
     background-color: #083b66;
@@ -21,16 +28,27 @@ li{
      color: greenyellow;
 }
 
-#active {
+#home{
   text-align: center;
+}
+
+#playerInfo {
+  text-align: center;
+}
+
+#active {
+  background-color: whitesmoke;
+  /* text-align: center; */
 }
 
 #retired {
+  background-color: whitesmoke;
   color: grey;
-  text-align: center;
+  /* text-align: center; */
 }
 
 #missing {
+  background-color: whitesmoke;
   color: crimson;
   text-align: center;
 }
@@ -41,5 +59,24 @@ li{
   margin-right: auto;
   margin-bottom: 1%;
   /* width: 50%; */
+}
+
+#dropDownList {
+  display: inline-block;
+  text-align: left;
+  /* float: left; */
+}
+
+.row > div {
+  background-color: cornsilk;
+  border: solid 1px black;
+  border-radius: 7px;
+  font-size: 1.5em;
+  font-weight: bold;
+  /* padding: 5%; */
+  /* margin: 0% 0.5% 0% 0.5%; */
+  padding: 0.5% 0% 3% 1%;
+  text-align: center;
+  width: 8%;
 }
    
