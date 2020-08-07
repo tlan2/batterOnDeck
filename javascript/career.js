@@ -47,7 +47,7 @@ function fetchAllPlayerInfo(name){
                   console.log(name);
                   console.log(position);
           
-                  document.getElementById('nameResult').innerHTML = player;
+                  document.getElementById('home').innerHTML = player;
 
                   fetchPlayerCareerStats(id, position);
             }
@@ -81,7 +81,7 @@ function fetchRetiredPlayerInfo(urlName){
       
         if(totalSize == "0"){
           console.log("in totalSize condition");
-          document.getElementById('nameResult').innerHTML = playerDoesNotExist();
+          document.getElementById('home').innerHTML = playerDoesNotExist();
           return;
 
         } else if(totalSize > 1){
@@ -101,7 +101,7 @@ function fetchRetiredPlayerInfo(urlName){
                           <h2 id="retired">${team}</h2>
                           <br>`;
 
-          document.getElementById('nameResult').innerHTML = player;
+          document.getElementById('home').innerHTML = player;
           fetchPlayerCareerStats(id, position);
 
         } else {
@@ -121,7 +121,7 @@ function fetchRetiredPlayerInfo(urlName){
                           <h2 id="retired">${team}</h2>
                           <br>`;
           
-          document.getElementById('nameResult').innerHTML = player;
+          document.getElementById('home').innerHTML = player;
     
           fetchPlayerCareerStats(id, position);
         }
@@ -356,9 +356,9 @@ if(position == "P"){
 
 // Searches inputted player when user presses "Enter"
   // https://stackoverflow.com/questions/12955222/how-to-trigger-html-button-when-you-press-enter-in-textbox
-  document.querySelector("#nameResult").addEventListener("keyup", event => {
+  document.querySelector("#home").addEventListener("keyup", event => {
     if(event.key !== "Enter") return; // Use `.key` instead.
-    document.querySelector("#nameResult").click(); // Things you want to do.
+    document.querySelector("#home").click(); // Things you want to do.
     event.preventDefault(); // No need to `return false;`.
 });
 
@@ -369,7 +369,7 @@ function convertToURlName(inputName){
 }
 
 function clearPlayerInfo(){
-  document.getElementById('nameResult').innerHTML = "";
+  document.getElementById('home').innerHTML = "";
   document.getElementById('stats').innerHTML = "";
 }
 
