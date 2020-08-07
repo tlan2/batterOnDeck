@@ -8,22 +8,29 @@
 .navbar {
     /* background-color: rgb(51, 67, 116); */
     background-color: #083b66;
-    color: white;
+    color: #ffffff;
+    height: 90px;
+    font-size: 15px;
+
 }
+
+
    
 .link {
      align-content: flex-end;
-     border-radius: 3px;
-     padding: 3%;
+    /* border-radius: 3px;
+     padding: 3%;*/
      text-decoration: none;
 }
 
 .link a {
   color: white;
 }
+
+
    
 .dropdown-item {
-     color: greenyellow;
+     color: rgb(105, 100, 103);
 }
 
 #home{
@@ -63,7 +70,7 @@
 #dropDownList {
   /* align-content: center;
   display: inline-block; */
-  text-align: center;
+  text-align: right;
   /* float: center; */
 }
 
