@@ -2,6 +2,37 @@
 // Batter On Deck
 // career.js
 
+var team_names_colors = [
+                  ["Arizona Diamondbacks",[167,25,48],[227,212,173],[0,0,0]], 
+                  ["Atlanta Braves", [206,17,65], [19, 39, 79], [234,170,0]],
+                  ["Baltimore Orioles", [223,70,1], [39, 37, 31],[255,255,255]],
+                  ["Boston Red Sox", [189, 48, 57], [12,35,64],[255,255,255]],
+                  ["Chicago Cubs", [14,51,134], [204,52,51],[255,255,255]],
+                  ["Chicago White Sox", [39,37,31], [196,206,212],[255,255,255]],
+                  ["Cincinnati Reds", [198,1,31],[0,0,0],[255,255,255]], 
+                  ["Cleveland Indians", [12,35,64],[227,25,55],[255,255,255]], 
+                  ["Colorado Rockies", [51,0,111], [196,206,212], [0,0,0]], 
+                  ["Detroit Tigers", [12,35,64],[250,70,22],[255,255,255]], 
+                  ["Houston Astros",[0,45,98], [235,110,31], [244,145,30]], 
+                  ["Kansas City Royals", [0,70,135],[189,155,96],[255,255,255]], 
+                  ["Los Angeles Angels", [0,50,99], [186,0,33], [134,38,51]], 
+                  ["Los Angeles Dodgers", [0,90,156], [239,62,66], [191,192,191]], 
+                  ["Miami Marlins", [0,163,224], [239,51,64], [65,116,141]],  
+                  ["Milwaukee Brewers", [255, 197, 47], [18, 40, 75], [255, 255, 255]], 
+                  ["Minnesota Twins", [0,43,92],[211,17,69],[185,151,91]], 
+                  ["New York Mets", [0,45, 114], [252,89,16],[255,255,255]], 
+                  ["New York Yankees", [0,48,135], [228,0,44],[255,255,255]], 
+                  ["Oakland Athletics",[0,56,49],[239,178,30],[162,170,173]], 
+                  ["Philadelphia Phillies",[232,24,40],[0,45,114],[255,255,255]], 
+                  ["Pittsburgh Pirates",[39,37,31],[253,184,39],[255,255,255]], 
+                  ["St. Louis Cardinals",[196,30,58],[12,35,64],[254,219,0]], 
+                  ["San Diego Padres",[47,36,29],[255,196,37],[255,255,255]], 
+                  ["San Francisco Giants", [253,90,30], [39,37,31],[255,255,255]], 
+                  ["Seattle Mariners", [12,44,86],[0,92,92],[255,255,255]], 
+                  ["Tampa Bay Rays",[9,44,92],[143,188,230],[245,209,48]], 
+                  ["Texas Rangers",[0,50,120],[192,17,31],[255,255,255]],
+                  ["Toronto Blue Jays", [19,74,142], [29,45,92], [232,41,28]] 
+                  ["Washington Nationals",[171,0,3],[20,34,90],[255,255,255]]];
 function searchByPlayerName(event){
    clearPlayerInfo();
    var inputPlayer = document.getElementById('getPlayer').value;
@@ -46,10 +77,23 @@ function fetchAllPlayerInfo(name){
 
                   console.log(name);
                   console.log(position);
+                  console.log('Team Name: ' + team);
           
                   document.getElementById('home').innerHTML = player;
-
-                  fetchPlayerCareerStats(id, position);
+                  var mainback = [0,0,0];
+                  var border = [0,0,0];
+                  var textcolor = [0,0,0];
+                  for (var q = 0; q < team_names_colors.length; q++){
+                    if(team == team_names_colors[q][0]){
+                      for (var r = 0; r < 3; r++){
+                        mainback[r] = team_names_colors[q][1][r];
+                        border[r] = team_names_colors[q][2][r];
+                        textcolor[r] = team_names_colors[q][3][r];
+                      }
+                    }
+                  }
+                var all_colors = [mainback, border, textcolor];
+                  fetchPlayerCareerStats(id, position, all_colors);
             }
             
     })
@@ -82,6 +126,14 @@ function fetchRetiredPlayerInfo(urlName){
         if(totalSize == "0"){
           console.log("in totalSize condition");
           document.getElementById('home').innerHTML = playerDoesNotExist();
+          const id = retiredData.search_player_all.queryResults.row['0'].player_id;
+          const name = retiredData.search_player_all.queryResults.row['0'].name_display_first_last;
+          const position = retiredData.search_player_all.queryResults.row['0'].position;
+          const team = retiredData.search_player_all.queryResults.row['0'].team_full;
+
+          console.log("first id of 2 players = " + id);
+          console.log("Retired name" + name);
+          console.log("Retired positon" + position);
           return;
 
         } else if(totalSize > 1){
@@ -100,9 +152,25 @@ function fetchRetiredPlayerInfo(urlName){
                           <h1 id="retired">${name} - ${position}</h1>
                           <h2 id="retired">${team}</h2>
                           <br>`;
+          var mainback = [0,0,0];
+          var border = [0,0,0];
+          var textcolor = [0,0,0];
+          for (var q = 0; q < team_names_colors.length; q++){
+            if(team == team_names_colors[q][0]){
+              for (var r = 0; r < 3; r++){
+                mainback[r] = team_names_colors[q][1][r];
+                border[r] = team_names_colors[q][2][r];
+                textcolor[r] = team_names_colors[q][3][r];
+              }
+            }
+          }
+        var all_colors = [mainback, border, textcolor];
+          console.log(name);
+          console.log(position);
+          console.log('Team Name: ' + team);           
 
           document.getElementById('home').innerHTML = player;
-          fetchPlayerCareerStats(id, position);
+          fetchPlayerCareerStats(id, position, all_colors);
 
         } else {
           console.log("Retired Player stats retrieval.");
@@ -115,15 +183,35 @@ function fetchRetiredPlayerInfo(urlName){
           console.log("retired id = " + id);
           console.log("Retired name" + name);
           console.log("Retired position " + position);
+          console.log("team: " + team);
+          console.log("count YEAH: " + team_names_colors.length);
+          console.log("test: " + team_names_colors[0])
+          var mainback = [0,0,0];
+          var border = [0,0,0];
+          var textcolor = [0,0,0];
+          for (var q = 0; q < team_names_colors.length; q++){
+            if(team == team_names_colors[q][0]){
+              for (var r = 0; r < 3; r++){
+                mainback[r] = team_names_colors[q][1+r];
+                border[r] = team_names_colors[q][4+r];
+                textcolor[r] = team_names_colors[q][7+r];
+              }
+            }
+          }
+        var all_colors = [mainback, border, textcolor];
+        console.log("all_colors" + all_colors);
 
+            
+          
           const player = `
                           <h1 id="retired">${name} - ${position}</h1>
                           <h2 id="retired">${team}</h2>
                           <br>`;
           
           document.getElementById('home').innerHTML = player;
-    
-          fetchPlayerCareerStats(id, position);
+          document.getElementById('home').innerHTML = player;
+   
+          fetchPlayerCareerStats(id, position, all_colors);
         }
 
         
@@ -134,10 +222,10 @@ function fetchRetiredPlayerInfo(urlName){
     });
   }
 
-function fetchPlayerCareerStats(id, position){
+function fetchPlayerCareerStats(id, position, all_colors){
 // Fetches player's CAREER REGULAR SEASON STATS
 console.log("position = " + position);
-
+console.log("colors = " + all_colors);
 if(position == "P"){
   console.log("PITCHER career stats");
   fetch(`https://mlb-data.p.rapidapi.com/json/named.sport_career_pitching.bam?player_id='${id}'&league_list_id='mlb'&game_type='R'`, {
@@ -168,7 +256,10 @@ if(position == "P"){
           const innningsPitched = careerData.sport_career_pitching.queryResults.row.ip;
           const runsPer9 = careerData.sport_career_pitching.queryResults.row.rs9;
 
-          const html = `<div class="row">
+          const html = `<div class="row" 
+                         background-color="rgb(all_colors[0][0], all_colors[0][1], all_colors[0][2])" 
+                         border="solid 1px rgb(all_colors[1][0], all_colors[1][1], all_colors[1][2])" 
+                         color="rgb(all_colors[2][0], all_colors[2][1], all_colors[2][2])>
                           <div class="col-sm-4" id="games">
                             Games
                             <br>

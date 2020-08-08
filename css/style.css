@@ -75,8 +75,8 @@
 }
 
 .row > div {
-  background-color: cornsilk;
-  border: solid 1px black;
+  /*background-color: cornsilk;
+  /*border: solid 1px black;
   border-radius: 7px;
   font-size: 1.5em;
   font-weight: bold;
