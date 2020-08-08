@@ -195,8 +195,8 @@ function fetchRetiredPlayerInfo(urlName){
            var filler = 'rgb(' + spectrum_of_all[0]+ ')'; 
            console.log('filler = ' + filler);
            document.getElementById("stats").style.backgroundColor = 'rgb(' + spectrum_of_all[0]+ ')';  
-           document.getElementById("stats").style.border = 'solid 1px' + 'rgb(' + spectrum_of_all[2]+ ')';  
-           document.getElementById("stats").style.color = 'rgb(' + spectrum_of_all[1]+ ')';  
+           document.getElementById("stats").style.border = 'solid 5px' + ' rgb(' + spectrum_of_all[1]+ ')';  
+           document.getElementById("stats").style.color = 'rgb(' + spectrum_of_all[2]+ ')';  
       
           
 
@@ -366,65 +366,80 @@ if(position == "P"){
             const so = careerData.sport_career_hitting.queryResults.row.so;
             const bb = careerData.sport_career_hitting.queryResults.row.bb;
 
-            const html = `<div class="row" id="myDIV">
-                            <div class="col-sm-4" id="homeRuns">
-                              Home Runs
-                              <br>
-                              <br>
-                              ${hr}
+            const html = `<div class = "container">
+                           <div class="row row-grid" >
+                            <div class="col-lg-3 col-md-3 col-sm-12" id="homeRuns">
+                            <div class="smaller-font">  
+                            Home Runs
                             </div>
-                            <div class="col-sm-4" id="battingAvg">
+                            <div class = "larger-font">
+                            ${hr}
+                          </div>
+                          </div>
+                            <div class="col-lg-3 col-md-3 col-sm-12" id="battingAvg">
+                            <div class="smaller-font">
                               Batting Avg.
-                              <br>
-                              <br>
+                              </div>
+                              <div class = "larger-font"> 
                               ${avg}
                             </div>
-                            <div class="col-sm-4" id="rbi">
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-12" id="rbi">
+                              <div class="smaller-font">
                               Runs Batted In (RBI)
-                              <br>
-                              <br>
+                              </div>
+                              <div class="larger-font">
                               ${rbi}
+                              </div>
                             </div>
                           </div>
-                          <div class="row">
-                            <div class="col-sm-4" id="slg">
+                          <div class="row row-grid">
+                            <div class="col-lg-3 col-md-3 col-sm-12" id="slg">
+                            <div class="smaller-font"> 
                               Slugging Pct (SLG)
-                              <br>
-                              <br>
+                            </div>
+                            <div class = "larger-font">
                               ${slg}
                             </div>
-                            <div class="col-sm-4" id="obp">
-                              On Base Pct (OBP)
-                              <br>
-                              <br>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-12" id="obp">
+                              <div class="smaller-font">
+                           On Base Pct (OBP)
+                           </div>
+                           <div class="larger-font">
                               ${obp}
                             </div>
-                            <div class="col-sm-4" id="runs">
-                              Runs (R)
-                              <br>
-                              <br>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-12" id="runs">
+                            <div class="smaller-font">
+                              Runs (R)</div>
+                              <div class="larger-font">
                               ${r}
                             </div>
                           </div>
-                          <div class="row">
-                            <div class="col-sm-4" id="steals">
-                              Steals (SB)
-                              <br>
-                              <br>
+                          </div>
+                          <div class="row row-grid">
+                            <div class="col-lg-3 col-md-3 col-sm-12" id="steals">
+                            <div class = "smaller-font">
+                              Steals (SB)</div>
+                              <div class = "larger-font">
                               ${sb}
+                              </div>
                             </div>
-                            <div class="col-sm-4" id="strikeOuts">
-                              Strike Outs (SO)
-                              <br>
-                              <br>
-                              ${so}
+                            <div class="col-lg-3 col-md-3 col-sm-12" id="strikeOuts">
+                            <div class="smaller-font">
+                              Strike Outs (SO)</div>
+                            <div class="larger-font">
+                              ${so}</div>
                             </div>
-                            <div class="col-sm-4" id="walks">
-                              Walks (BB)
-                              <br>
-                              <br>
+                            <div class="col-lg-3 col-md-3 col-sm-12 " id="walks">
+                              <div class = "smaller-font">
+                              Walks (BB)</div>
+                             <div class = "larger-font">
                               ${bb}
+                              </div>
                             </div>
+                          </div>
                           </div>`
             
           document.getElementById('stats').innerHTML = html;              

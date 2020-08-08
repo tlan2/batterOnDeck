@@ -5,6 +5,10 @@
   background-size: cover;
 } */
 
+body{
+  font-family:
+}
+
 .navbar {
     /* background-color: rgb(51, 67, 116); */
     background-color: #083b66;
@@ -14,7 +18,11 @@
 
 }
 
-
+.container{
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
    
 .link {
      align-content: flex-end;
@@ -74,16 +82,47 @@
   /* float: center; */
 }
 
-.row > div {
-  /*background-color: cornsilk;
-  /*border: solid 1px black;
-  border-radius: 7px;
-  font-size: 1.5em;
-  font-weight: bold;
-  /* padding: 5%; */
-  /* margin: 0% 0.5% 0% 0.5%; */
-  padding: 0.5% 0% 3% 1%;
+.row > div[class^='col'] {
+  display: block;
+  height: 120px;
+  padding: 5px 5px;
+  border: 2px solid white;
+  color: white;
   text-align: center;
-  width: 8%;
+  font-family: 'Oleo Script';
+  font-size: 1.8vw;
+  justify-content: space-between;
+  align-content: space-around;
+  margin-right: auto;
+  margin-left:auto;
+  
+  
 }
+
+.smaller-font{
+  font-size:1.3vw;
+}
+
+.larger-font{
+  font-size:4.0vw;
+}
+
+.row-grid, .row-grid + .row-grid{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.stats{
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  width: 75%;
+}
+
+
+
+
+
+
+
    
