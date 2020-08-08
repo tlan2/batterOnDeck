@@ -44,6 +44,8 @@ function searchByPlayerName(event){
 function fetchAllPlayerInfo(name){
 
   var urlName = convertToURlName(name);
+  var spectrum_of_all = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+
 
   fetch(`https://mlb-data.p.rapidapi.com/json/named.search_player_all.bam?active_sw='Y'&sport_code='mlb'&name_part='${urlName}'`, {
 	"method": "GET",
@@ -80,20 +82,17 @@ function fetchAllPlayerInfo(name){
                   console.log('Team Name: ' + team);
           
                   document.getElementById('home').innerHTML = player;
-                  var mainback = [0,0,0];
-                  var border = [0,0,0];
-                  var textcolor = [0,0,0];
+                  
                   for (var q = 0; q < team_names_colors.length; q++){
                     if(team == team_names_colors[q][0]){
-                      for (var r = 0; r < 3; r++){
-                        mainback[r] = team_names_colors[q][1][r];
-                        border[r] = team_names_colors[q][2][r];
-                        textcolor[r] = team_names_colors[q][3][r];
+                      for (var r = 0; r < 9; r++){
+                        spectrum_of_all[r] = team_names_colors[r+1];
                       }
+                      break;
                     }
                   }
-                var all_colors = [mainback, border, textcolor];
-                  fetchPlayerCareerStats(id, position, all_colors);
+               
+                  fetchPlayerCareerStats(id, position, spectrum_of_all);
             }
             
     })
@@ -107,6 +106,7 @@ function fetchRetiredPlayerInfo(urlName){
 // Returns RETIRED players PERSONAL info including ID
 
   console.log("retired player fetch.")
+  var spectrum_of_all = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
 
   fetch(`https://mlb-data.p.rapidapi.com/json/named.search_player_all.bam?active_sw='N'&sport_code='mlb'&name_part='${urlName}'`, {
 	"method": "GET",
@@ -152,25 +152,21 @@ function fetchRetiredPlayerInfo(urlName){
                           <h1 id="retired">${name} - ${position}</h1>
                           <h2 id="retired">${team}</h2>
                           <br>`;
-          var mainback = [0,0,0];
-          var border = [0,0,0];
-          var textcolor = [0,0,0];
-          for (var q = 0; q < team_names_colors.length; q++){
-            if(team == team_names_colors[q][0]){
-              for (var r = 0; r < 3; r++){
-                mainback[r] = team_names_colors[q][1][r];
-                border[r] = team_names_colors[q][2][r];
-                textcolor[r] = team_names_colors[q][3][r];
-              }
-            }
-          }
-        var all_colors = [mainback, border, textcolor];
+     
+                        for (var q = 0; q < team_names_colors.length; q++){
+                            if(team == team_names_colors[q][0]){
+                              for (var r = 0; r < 9; r++){
+                                spectrum_of_all[r] = team_names_colors[r+1];
+                              }
+                              break;
+                            }
+                          }
           console.log(name);
           console.log(position);
           console.log('Team Name: ' + team);           
 
           document.getElementById('home').innerHTML = player;
-          fetchPlayerCareerStats(id, position, all_colors);
+          fetchPlayerCareerStats(id, position, spectrum_of_all);
 
         } else {
           console.log("Retired Player stats retrieval.");
@@ -185,21 +181,24 @@ function fetchRetiredPlayerInfo(urlName){
           console.log("Retired position " + position);
           console.log("team: " + team);
           console.log("count YEAH: " + team_names_colors.length);
-          console.log("test: " + team_names_colors[0])
-          var mainback = [0,0,0];
-          var border = [0,0,0];
-          var textcolor = [0,0,0];
+          console.log("test: " + team_names_colors[25][0]);
+          console.log("equality test: " + (team == team_names_colors[25][0]));
           for (var q = 0; q < team_names_colors.length; q++){
             if(team == team_names_colors[q][0]){
               for (var r = 0; r < 3; r++){
-                mainback[r] = team_names_colors[q][1+r];
-                border[r] = team_names_colors[q][4+r];
-                textcolor[r] = team_names_colors[q][7+r];
+                spectrum_of_all[r] = team_names_colors[q][r+1];
               }
+              break;
             }
           }
-        var all_colors = [mainback, border, textcolor];
-        console.log("all_colors" + all_colors);
+           console.log('after loop spectrum is: ' + spectrum_of_all[0]); 
+           var filler = 'rgb(' + spectrum_of_all[0]+ ')'; 
+           console.log('filler = ' + filler);
+           document.getElementById("stats").style.backgroundColor = 'rgb(' + spectrum_of_all[0]+ ')';  
+           document.getElementById("stats").style.border = 'solid 1px' + 'rgb(' + spectrum_of_all[2]+ ')';  
+           document.getElementById("stats").style.color = 'rgb(' + spectrum_of_all[1]+ ')';  
+      
+          
 
             
           
@@ -211,7 +210,7 @@ function fetchRetiredPlayerInfo(urlName){
           document.getElementById('home').innerHTML = player;
           document.getElementById('home').innerHTML = player;
    
-          fetchPlayerCareerStats(id, position, all_colors);
+          fetchPlayerCareerStats(id, position, spectrum_of_all);
         }
 
         
@@ -222,10 +221,10 @@ function fetchRetiredPlayerInfo(urlName){
     });
   }
 
-function fetchPlayerCareerStats(id, position, all_colors){
+function fetchPlayerCareerStats(id, position, colors_of_choice){
 // Fetches player's CAREER REGULAR SEASON STATS
 console.log("position = " + position);
-console.log("colors = " + all_colors);
+console.log("colors = " + colors_of_choice);
 if(position == "P"){
   console.log("PITCHER career stats");
   fetch(`https://mlb-data.p.rapidapi.com/json/named.sport_career_pitching.bam?player_id='${id}'&league_list_id='mlb'&game_type='R'`, {
@@ -256,11 +255,8 @@ if(position == "P"){
           const innningsPitched = careerData.sport_career_pitching.queryResults.row.ip;
           const runsPer9 = careerData.sport_career_pitching.queryResults.row.rs9;
 
-          const html = `<div class="row" 
-                         background-color="rgb(all_colors[0][0], all_colors[0][1], all_colors[0][2])" 
-                         border="solid 1px rgb(all_colors[1][0], all_colors[1][1], all_colors[1][2])" 
-                         color="rgb(all_colors[2][0], all_colors[2][1], all_colors[2][2])>
-                          <div class="col-sm-4" id="games">
+          const html = `<div class="row" id="myDIV"
+                            <div class="col-sm-4" id="games">
                             Games
                             <br>
                             <br>
@@ -370,7 +366,7 @@ if(position == "P"){
             const so = careerData.sport_career_hitting.queryResults.row.so;
             const bb = careerData.sport_career_hitting.queryResults.row.bb;
 
-            const html = `<div class="row">
+            const html = `<div class="row" id="myDIV">
                             <div class="col-sm-4" id="homeRuns">
                               Home Runs
                               <br>
