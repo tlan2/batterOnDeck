@@ -5,7 +5,7 @@ Created by Tom Lancaster and [Pat Rademacher](https://github.com/PatRademacher) 
 
 ![home page](images/home.png)
 
-## Website Link
+## Website Links
 [INSERT WEB URL HERE] (URL LINK)
 
 ## API

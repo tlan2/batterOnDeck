@@ -1,6 +1,6 @@
 // Tom Lancaster & Pat Rademacher (c) 2020
 // Batter On Deck
-// career.js
+// season.js
 
 function searchByPlayerName(event){
    clearPlayerInfo();
