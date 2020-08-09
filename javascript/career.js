@@ -2,6 +2,9 @@
 // Batter On Deck
 // career.js
 
+
+
+
 var team_names_colors = [
                   ["Arizona Diamondbacks",[167,25,48],[227,212,173],[0,0,0]], 
                   ["Atlanta Braves", [206,17,65], [19, 39, 79], [234,170,0]],
@@ -9,7 +12,7 @@ var team_names_colors = [
                   ["Boston Red Sox", [189, 48, 57], [12,35,64],[255,255,255]],
                   ["Chicago Cubs", [14,51,134], [204,52,51],[255,255,255]],
                   ["Chicago White Sox", [39,37,31], [196,206,212],[255,255,255]],
-                  ["Cincinnati Reds", [198,1,31],[0,0,0],[255,255,255]], 
+                  ["Cincinnati Reds", [198,1,31],[0,0,0],[0,0,0]], 
                   ["Cleveland Indians", [12,35,64],[227,25,55],[255,255,255]], 
                   ["Colorado Rockies", [51,0,111], [196,206,212], [0,0,0]], 
                   ["Detroit Tigers", [12,35,64],[250,70,22],[255,255,255]], 
@@ -194,10 +197,12 @@ function fetchRetiredPlayerInfo(urlName){
            console.log('after loop spectrum is: ' + spectrum_of_all[0]); 
            var filler = 'rgb(' + spectrum_of_all[0]+ ')'; 
            console.log('filler = ' + filler);
+           document.head.innerHTML += "<style>\n.row > div[class^='col'] {display: block; height: 120px; padding: 5px 5px; text-align: center; font-family: 'Oleo Script'; font: Oleo Script; font-size: 1.8vw; justify-content: space-between; align-content: space-around; margin-right: auto; margin-left:auto; border: solid 4px" + " rgb(" + spectrum_of_all[1]+");}</style>";
+console.log(document.head.innerHTML);
            document.getElementById("stats").style.backgroundColor = 'rgb(' + spectrum_of_all[0]+ ')';  
-           document.getElementById("stats").style.border = 'solid 5px' + ' rgb(' + spectrum_of_all[1]+ ')';  
+           document.getElementById("stats").style.border = 'solid 20px' + ' rgb(' + spectrum_of_all[1]+ ')';  
            document.getElementById("stats").style.color = 'rgb(' + spectrum_of_all[2]+ ')';  
-      
+
           
 
             
@@ -390,7 +395,10 @@ if(position == "P"){
                               </div>
                               <div class="larger-font">
                               ${rbi}
+
                               </div>
+                              <img src="images/two_balls.png" align-content="flex-end" width="150px" float="center" display="flex">
+
                             </div>
                           </div>
                           <div class="row row-grid">
