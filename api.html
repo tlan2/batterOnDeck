@@ -65,16 +65,30 @@ api.html
         </div>
       </nav>
 
-      <div id="home">
-        <h3>Welcome To Batter On Deck!</h3>
-        <p>Step up to the plate and search for any player-active or retired-in our search bar above!</p>
-        <p>Right off the bat you should see the player's career stats on this page or their stats by season 
-          on the "Season" page!</p>
-        <p>You can even throw us a curve ball and Batter On Deck (BoD) promises we won't drop the ball!</p>
-        <p>BoD guarantees to bat a thousand on finding the box score stats you want to see!</p>
-        </div>
-      <div id="stats"></div>
+      <!-- I recommend a container here -->
+      <div id="api">
+        <h3>MLB Data API</h3>
+        <p>Batter On Deck uses promises to gather and fetch data from MLB Data API to supply our website with player info. 
+          We used 3 of the main API calls to pull players' personal, seasonal and career data. 
+          Examples are provided below. 
+          We had to mix and match them in order to retrieve all the needed information. 
+          You can learn more about the other API calls at <a href="https://appac.github.io/mlb-data-api-docs/">appac.github.io/mlb-data-api-docs</a>
+          or <a href="https://rapidapi.com/theapiguy/api/mlb-data/endpoints">rapidapi.com/theapiguy/api/mlb-data/endpoints</a>.</p>
+          <h4>Find Personal Info By Name</h4>
+          <img src="images/API/nameAPI.png" alt="personal info by name api call">
+          <h4>.json Data Retrieved</h4>
+          <img src="images/API/nameReturn.png" alt=".json returned from name api call">
+          <h4>Find Personal Info By ID</h4>
+          <img src="images/API/idPersonalAPI.png" alt="personal info by id api call">
+          <h4>Find Career Hitting & Pitching Stats by ID</h4>
+          <img src="images/API/careerHittingAPI.png" alt="career hitting api call">
+          <img src="images/API/careerPitchingAPI.png" alt="career pitching api call">
+          <h4>Find Season Hitting & Pitching Stats by ID</h4>
+          <img src="images/API/seasonHittingAPI.png" alt="season hitting api call">
+          <img src="images/API/seasonPitchingAPI.png" alt="season pitching api call">
+      </div>  
 
-    <script src="javascript/career.js"></script>
+
+
   </body>
 </html>
