@@ -1,9 +1,15 @@
-/* body{
+/* 
+Thomas Lancaster, Patrick Rademacher (c) 2020
+Batter On Deck 
+style.css
+*/
+
+body{
   background-image: url('/BatterOnDeck/images/background.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;  
   background-size: cover;
-} */
+}
 
 .navbar {
     /* background-color: rgb(51, 67, 116); */
@@ -78,6 +84,10 @@
   padding: 0.5% 0% 3% 1%;
   text-align: center;
   width: 8%;
+}
+
+.container {
+  background-color: white;
 }
 
 #api > img {
