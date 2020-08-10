@@ -14,7 +14,6 @@ body{
 
 
 .navbar {
-    /* background-color: rgb(51, 67, 116); */
     background-color: #083b66;
     color: #ffffff;
     height: 90px;
@@ -42,7 +41,7 @@ body{
 }
 
 #home{
-  margin-top: 2%;
+  margin-top: 1%;
   text-align: center;
 }
 
