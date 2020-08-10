@@ -6,7 +6,7 @@ Created by Tom Lancaster and [Pat Rademacher](https://github.com/PatRademacher) 
 ![home page](images/home.png)
 
 ## Website Links
-[INSERT WEB URL HERE] (URL LINK)
+[batter-on-deck.herokuapp.com/home.html] (http://batter-on-deck.herokuapp.com/home.html)
 
 ## API
 Batter On Deck uses promises to gather and fetch data from MLB Data API to supply our website with player info. We used 3 of the main API calls to pull players' personal, seasonal and career data. We had to mix and match them in order to retrieve all the needed information. You can learn more about the other API calls at [https://appac.github.io/mlb-data-api-docs/](https://appac.github.io/mlb-data-api-docs/).
