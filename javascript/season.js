@@ -530,3 +530,4 @@ function clearPlayerInfo(){
  document.getElementById('nameResult').innerHTML = "";
  document.getElementById('stats').innerHTML = "";
 }
+

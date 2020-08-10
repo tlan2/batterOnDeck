@@ -1,7 +1,7 @@
 <!-- 
 Thomas Lancaster, Patrick Rademacher (c) 2020
 Batter On Deck 
-api.html
+home.html
 -->
 
 <!DOCTYPE html>
@@ -9,7 +9,7 @@ api.html
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>API-Batter On Deck</title>
+    <title>Home-Batter On Deck</title>
     <link rel="stylesheet" type="text/css" 
           href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"/>
     <link rel="icon" type="image/png" href="images/favicon.png" />
@@ -19,6 +19,8 @@ api.html
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
     <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="10-bootstrap-grid.css" />
+    <link href='https://fonts.googleapis.com/css?family=Oleo Script' rel='stylesheet'>
   </head>
 
   <body>
@@ -56,30 +58,13 @@ api.html
         </div>
         </div>
       </nav>
-      
-      <div class="container" id="api">
-        <div id="home">
-          <h3>MLB Data API</h3>
-        </div>
-        <br>
-        <p>Batter On Deck uses promises to gather and fetch data from MLB Data API to supply our website with player info. 
-          We used 3 of the main API calls to pull players' personal, seasonal and career data. 
-          Examples are provided below. 
-          We had to mix and match them in order to retrieve all the needed information. 
-          You can learn more about the other API calls at <a href="https://appac.github.io/mlb-data-api-docs/">MLB Data API official documentation</a>
-          or <a href="https://rapidapi.com/theapiguy/api/mlb-data/endpoints">Rapid API's examples</a>.</p>
-          <h5>Find Personal Info By Name</h5>
-          <img src="images/API/nameAPI.png" alt="personal info by name api call">
-          <h5>.json Data Retrieved</h5>
-          <img src="images/API/nameReturn.png" alt=".json returned from name api call">
-          <h5>Find Personal Info By ID</h5>
-          <img src="images/API/idPersonalAPI.png" alt="personal info by id api call">
-          <h5>Find Career Hitting & Pitching Stats by ID</h5>
-          <img src="images/API/careerHittingAPI.png" alt="career hitting api call">
-          <img src="images/API/careerPitchingAPI.png" alt="career pitching api call">
-          <h5>Find Season Hitting & Pitching Stats by ID</h5>
-          <img src="images/API/seasonHittingAPI.png" alt="season hitting api call">
-          <img src="images/API/seasonPitchingAPI.png" alt="season pitching api call">
-      </div>  
+    <div class="container">
+      <div id="home">
+        <h3>Career Stats</h3>
+      </div>
+    </div>
+    <div id="stats"></div>
+     
+    <script src="javascript/career.js"></script>
   </body>
 </html>
