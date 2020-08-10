@@ -2,6 +2,37 @@
 // Batter On Deck
 // season.js
 
+var team_names_colors = [
+  ["Arizona Diamondbacks",[167,25,48],[227,212,173],[0,0,0]], 
+  ["Atlanta Braves", [206,17,65], [19, 39, 79], [234,170,0]],
+  ["Baltimore Orioles", [223,70,1], [0, 0, 0],[0,0,0]],
+  ["Boston Red Sox", [189, 48, 57], [12,35,64],[12,35,64]],
+  ["Chicago Cubs", [14,51,134], [204,52,51],[100,100,100]],
+  ["Chicago White Sox", [39,37,31], [196,206,212],[255,255,255]],
+  ["Cincinnati Reds", [198,1,31],[0,0,0],[0,0,0]], 
+  ["Cleveland Indians", [12,35,64],[227,25,55],[255,255,255]], 
+  ["Colorado Rockies", [51,0,111], [196,206,212], [0,0,0]], 
+  ["Detroit Tigers", [12,35,64],[250,70,22],[100,100,100]], 
+  ["Houston Astros",[0,45,98], [235,110,31], [244,145,30]], 
+  ["Kansas City Royals", [0,70,135],[189,155,96],[123,178,201]], 
+  ["Los Angeles Angels", [0,50,99], [186,0,33], [134,38,51]], 
+  ["Los Angeles Dodgers", [0,90,156], [239,62,66], [191,192,191]], 
+  ["Miami Marlins", [0,163,224], [239,51,64], [65,116,141]],  
+  ["Milwaukee Brewers", [255, 197, 47], [18, 40, 75], [18, 40, 75]], 
+  ["Minnesota Twins", [0,43,92],[211,17,69],[185,151,91]], 
+  ["New York Mets", [0,45, 114], [252,89,16],[252,89,16]], 
+  ["New York Yankees", [18,36,72], [196,206,211],[196,206,211]], 
+  ["Oakland Athletics",[0,56,49],[239,178,30],[162,170,173]], 
+  ["Philadelphia Phillies",[232,24,40],[0,45,114],[0,45,114]], 
+  ["Pittsburgh Pirates",[0,0,0],[253,184,39],[253,184,39]], 
+  ["St. Louis Cardinals",[196,30,58],[12,35,64],[254,219,0]], 
+  ["San Diego Padres",[47,36,29],[255,196,37],[255,255,255]], 
+  ["San Francisco Giants", [253,90,30], [0,0,0],[0,0,0]], 
+  ["Seattle Mariners", [12,44,86],[0,92,92],[100,100,100]], 
+  ["Tampa Bay Rays",[9,44,92],[143,188,230],[245,209,48]], 
+  ["Texas Rangers",[0,50,120],[192,17,31],[100,100,100]],
+  ["Toronto Blue Jays", [19,74,142], [29,45,92], [232,41,28]] 
+  ["Washington Nationals",[171,0,3],[20,34,90],[100,100,100]]];
 
 function searchByPlayerName(event){
   clearPlayerInfo();
@@ -36,13 +67,27 @@ function fetchAllPlayerInfo(name){
              console.log("Not active.")
              fetchRetiredPlayerInfo(urlName);
        } else {
+                 var spectrum_of_all = [[0,0,0], [0,0,0], [0,0,0]];
                  const id = data.search_player_all.queryResults.row.player_id;
                  const name = data.search_player_all.queryResults.row.name_display_first_last;
                  const position = data.search_player_all.queryResults.row.position;
                  const team = data.search_player_all.queryResults.row.team_full;
+                 for (var i = 0; i < team_names_colors.length; i++){
+                   if (team == team_names_colors[i][0]){
+                     for (var j = 0; j < 3; j++){
+                        spectrum_of_all[j] = team_names_colors[i][j+1];}
+                        break;
+                     }
+                    
+                     }
+                     document.head.innerHTML += "<style>\n.row > div[class^='col'] display: block; height: 120px; padding: 5px 5px; text-align: center; font-family: 'Oleo Script'; font: Oleo Script; font-size: 1.8vw; justify-content: space-between; align-content: space-around; margin-right: auto; margin-left:auto;background-color: rgb(" + spectrum_of_all[0]+"); color:  rgb(" + spectrum_of_all[2]+") border: solid 4px" + " rgb(" + spectrum_of_all[1]+");}</style>";
+
+
+                   }
+                 })
                  var firstYear = data.search_player_all.queryResults.row.pro_debut_date;
 
-                 var firstYear = firstYear.substring(0,4);
+                 firstYear = firstYear.substring(0,4);
 
                  console.log(firstYear)
 
@@ -146,10 +191,20 @@ function fetchPlayerByID(id){
            console.log("fetchPlayerByID-data", data)
 
 
-
+           var spectrum_of_all = [[0,0,0], [0,0,0], [0,0,0]];
            const name = data.player_info.queryResults.row.name_display_first_last;
            const position = data.player_info.queryResults.row.primary_position_txt;
            const team = data.player_info.queryResults.row.team_name;
+           const team = data.search_player_all.queryResults.row.team_full;
+                 for (var i = 0; i < team_names_colors.length; i++){
+                   if (team == team_names_colors[i][0]){
+                     for (var j = 0; j < 3; j++){
+                        spectrum_of_all[j] = team_names_colors[i][j+1];}
+                        break;
+                     }
+                    
+                     }
+                     document.head.innerHTML += "<style>\n.row > div[class^='col'] display: block; height: 120px; padding: 5px 5px; text-align: center; font-family: 'Oleo Script'; font: Oleo Script; font-size: 1.8vw; justify-content: space-between; align-content: space-around; margin-right: auto; margin-left:auto;background-color: rgb(" + spectrum_of_all[0]+"); color:  rgb(" + spectrum_of_all[2]+") border: solid 4px" + " rgb(" + spectrum_of_all[1]+");}</style>";
            var firstYear = data.player_info.queryResults.row.pro_debut_date;
            var lastYear = data.player_info.queryResults.row.end_date;
            firstYear = firstYear.substring(0,4);
