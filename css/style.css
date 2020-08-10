@@ -1,9 +1,15 @@
-/* body{
+/* 
+Thomas Lancaster, Patrick Rademacher (c) 2020
+Batter On Deck 
+style.css
+*/
+
+body{
   background-image: url('/BatterOnDeck/images/background.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;  
   background-size: cover;
-} */
+}
 
 
 
@@ -84,8 +90,6 @@
   /* float: center; */
 }
 
-
-
 .smaller-font{
   font-size:1.3vw;
 }
@@ -94,6 +98,7 @@
   font-size:4.0vw;
   margin-bottom: -10%;
 }
+
 
 .row-grid, .row-grid + .row-grid{
   margin-top: 10px;
@@ -107,12 +112,11 @@
   width: 75%;
 }
 
+.container {
+  background-color: white;
+}
 
+#api > img {
+  margin: 1%;
+}
 
-
-
-
-
-
-
-   

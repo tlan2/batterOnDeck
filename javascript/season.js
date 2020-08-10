@@ -1,6 +1,8 @@
 // Tom Lancaster & Pat Rademacher (c) 2020
 // Batter On Deck
-// career.js
+// season.js
+
+
 function searchByPlayerName(event){
   clearPlayerInfo();
   var inputPlayer = document.getElementById('getPlayer').value;
@@ -66,10 +68,8 @@ function fetchAllPlayerInfo(name){
                  selectElement.addEventListener('change', (event) => {
                   fetchTeamsFromYear(`${event.target.value}`);
                    fetchPlayerSeasonStats(id, position, `${event.target.value}`);
-                 });
-                 
-           }
-           
+                 });     
+           }     
    })
    .catch(err => {
      console.log(err);
@@ -506,6 +506,12 @@ function playerDoesNotExist(){
 
  return html;
 }
+
+
+
+//#############################################################
+//# Pat's Attempt at Rating System - Not Currently Working
+//#############################################################
 
 // function refetchSeasonStats(year){
 
