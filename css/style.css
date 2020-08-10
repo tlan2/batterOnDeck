@@ -5,7 +5,7 @@ style.css
 */
 
 body{
-  background-image: url('/BatterOnDeck/images/background.jpg');
+  background-image: url('/images/background.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;  
   background-size: cover;
@@ -22,9 +22,11 @@ body{
 }
 
 .container{
-  width: 80%;
+  /* background-color: #ffffff; */
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 1%;
+  width: 80%;
 }
    
 .link {
@@ -41,8 +43,31 @@ body{
 }
 
 #home{
+  background-color: #ffffff;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 1%;
+  opacity: 85%;
+  padding-top: 1%;
   text-align: center;
+  width: 80%;
+}
+
+ #welcomeMessage {
+  font-weight: bold;
+  margin-top: 20px;
+  padding: 10px 5px 15px 25px;
+  opacity: 90%;
+  text-align: left;
+}
+
+#homeContainer{
+  /* margin-left: auto;
+  margin-right: auto; */
+  margin-top: 3%;
+  padding-bottom: 1%;
+  padding-top: 1%;
+  width: 50%;
 }
 
 #playerInfo {
@@ -94,14 +119,11 @@ body{
 }
 
 .stats{
+  margin-bottom: 2%;
   margin-left: auto;
   margin-right: auto;
   position: relative;
   width: 75%;
-}
-
-.container {
-  background-color: white;
 }
 
 #api > img {

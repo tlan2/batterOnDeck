@@ -24,6 +24,14 @@ api.html
     <nav class="navbar navbar-dark navbar-expand-md sticky-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="home.html"><img src="images/logo.png" class="img-responsive" width = "30%"></a>
+        <div class="flex-grow-1 d-flex">
+          <form class="form-inline flex-nowrap bg-light mx-0 mx-lg-auto rounded p-1">
+              <input class="form-control mr-sm-2" id="getPlayer" type="search" placeholder="Search by Player Name" aria-label="Search">
+              <button class="btn btn-default" type="submit" onclick="searchByPlayerName(event)">
+                <i class="fa fa-search"></i>
+              </button>
+          </form>
+      </div>
 
         <button class ="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
           <span class="navbar-toggler-icon"></span>
@@ -47,6 +55,7 @@ api.html
         </div>
         </div>
       </nav>
+      
       <div class="container" id="api">
         <div id="home">
           <h3>MLB Data API</h3>

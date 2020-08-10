@@ -35,7 +35,8 @@ var team_names_colors = [
                   ["Tampa Bay Rays",[9,44,92],[143,188,230],[245,209,48]], 
                   ["Texas Rangers",[0,50,120],[192,17,31],[255,255,255]],
                   ["Toronto Blue Jays", [19,74,142], [29,45,92], [232,41,28]] 
-                  ["Washington Nationals",[171,0,3],[20,34,90],[255,255,255]]];
+                  ["Washington Nationals",[171,0,3],[20,34,90],[255,255,255]]]
+  
 function searchByPlayerName(event){
    clearPlayerInfo();
    var inputPlayer = document.getElementById('getPlayer').value;
@@ -202,10 +203,6 @@ console.log(document.head.innerHTML);
            document.getElementById("stats").style.backgroundColor = 'rgb(' + spectrum_of_all[0]+ ')';  
            document.getElementById("stats").style.border = 'solid 20px' + ' rgb(' + spectrum_of_all[1]+ ')';  
            document.getElementById("stats").style.color = 'rgb(' + spectrum_of_all[2]+ ')';  
-
-          
-
-            
           
           const player = `
                           <h1 id="retired">${name} - ${position}</h1>

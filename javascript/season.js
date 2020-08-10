@@ -60,13 +60,11 @@ function fetchAllPlayerInfo(name){
                  document.getElementById('nameResult').innerHTML = player + dropDownList;
 
                  var currentYear = new Date().getFullYear();
-                 fetchTeamsFromYear(currentYear.toString())
                  fetchPlayerSeasonStats(id, position, currentYear.toString());
 
                  const selectElement = document.getElementById("dropDownList");
 
                  selectElement.addEventListener('change', (event) => {
-                  fetchTeamsFromYear(`${event.target.value}`);
                    fetchPlayerSeasonStats(id, position, `${event.target.value}`);
                  });     
            }     
@@ -168,12 +166,10 @@ function fetchPlayerByID(id){
    
            document.getElementById('nameResult').innerHTML = html + dropDownList;
 
-           fetchTeamsFromYear(lastYear);
            fetchPlayerSeasonStats(id, position, lastYear);
 
            const selectElement = document.getElementById("dropDownList");
            selectElement.addEventListener('change', (event) => {
-             fetchTeamsFromYear(`${event.target.value}`);
              fetchPlayerSeasonStats(id, position, `${event.target.value}`);
            });
    })
@@ -739,3 +735,4 @@ function fetchRosterFromTeams(team_ids, year){
           .catch(err => {
             console.log(err);
           });return all_the_data;}}
+          */
