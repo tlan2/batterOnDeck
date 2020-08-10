@@ -23,57 +23,160 @@ stats.html
   <body>
     <nav class="navbar navbar-dark navbar-expand-md sticky-top">
       <div class="container-fluid">
-        <a class="navbar-brand" href="home.html"><img src="images/logo.png" width = "50%"></a>
-
-        <div class="flex-grow-1 d-flex">
-          <form class="form-inline flex-nowrap bg-light mx-0 mx-lg-auto rounded p-1">
-              <input class="form-control mr-sm-2" id="getPlayer" type="search" placeholder="Search by Player Name" aria-label="Search">
-              <button class="btn btn-default" type="submit" onclick="searchByPlayerName(event)">
-                <i class="fa fa-search"></i>
-              </button>
-          </form>
-      </div>
+        <a class="navbar-brand" href="home.html"><img src="images/logo.png" class="img-responsive" width = "30%"></a>
 
         <button class ="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
           <span class="navbar-toggler-icon"></span>
         </button> 
 
         <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class = "navbar-nav ml-auto">     
-            <li class="nav-item active">
-              <a class="nav-link" href="#"></a>
-            </li>
-            <ul class="nav navbar-nav navbar-right">
-              <li class="nav-item">
-                <div class="dropdown">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria>
-                    About
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="api.html">API</a>
-                    <a class="dropdown-item" href="stats.html">Stats</a>
-                    <a class="dropdown-item" href="creators.html">BoD Creators</a>
-                  </div>
-                </div>
-              </li>
-              <li class="nav-item"><a href="season.html">Season</a></li>
-              <li class="nav-item"><a href="career.html">Career</a></li>
-              <li class="nav-item"><a href="career.html">Teams</a></li>
-            </ul>
+          <ul class = "navbar-nav ml-auto align-items-end">     
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          About
+        </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="api.html">API</a>
+            <a class="dropdown-item" href="stats.html">Stats</a>
+          </div>
+      </li>
+            <a class="nav-item nav-link" href="season.html">Season</a>
+            <a class="nav-item nav-link" href="career.html">Career</a>
           </ul>
+        </div>
         </div>
       </nav>
 
-      <div id="home">
-        <h3>Welcome To Batter On Deck!</h3>
-        <p>Step up to the plate and search for any player-active or retired-in our search bar above!</p>
-        <p>Right off the bat you should see the player's career stats on this page or their stats by season 
-          on the "Season" page!</p>
-        <p>You can even throw us a curve ball and Batter On Deck (BoD) promises we won't drop the ball!</p>
-        <p>BoD guarantees to bat a thousand on finding the box score stats you want to see!</p>
-        </div>
-      <div id="stats"></div>
-
-    <script src="javascript/career.js"></script>
+      <div class="container">
+      <h2>Hitting Abbreviations</h2>
+      <div class="table-responsive">
+        <table class="table table-sm table-hover table-dark text-center">
+          <thead>
+            <tr>
+              <th scope="col">Abbreviation</th>
+              <th scope="col">Meaning</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">2B</th>
+              <td>Doubles or 2 Bases</td>
+            </tr>
+            <tr>
+              <th scope="row">3B</th>
+              <td>Triples or 3 Bases</td>
+            </tr>
+            <tr>
+              <th scope="row">AB</th>
+              <td>At Bats (Walks, Sacrifice Flys, or Hit by Pitch Instances Don't Count)</td>
+            </tr>
+            <tr>
+              <th scope="row">AVG (BA)</th>
+              <td>Batting Average (Hit Frequency)</td>
+            </tr>
+            <tr>
+              <th scope="row">BB</th>
+              <td>Bases on Balls (Walks)</td>
+            </tr>
+            <tr>
+              <th scope="row">G</th>
+              <td>Games Played</td>
+            </tr>
+            <tr>
+              <th scope="row">H</th>
+              <td>Hits</td>
+            </tr>
+            <tr>
+              <th scope="row">HR</th>
+              <td>Home Runs</td>
+            </tr>
+            <tr>
+              <th scope="row">OBP</th>
+              <td><a href="https://en.wikipedia.org/wiki/On-base_percentage#:~:text=It%20is%20the%20ratio%20of,fielder's%20obstruction%2C%20or%20catcher's%20interference.">
+                On Base Percentage</a></td>
+            </tr>
+            <tr>
+              <th scope="row">OPS</th>
+              <td><a href="https://en.wikipedia.org/wiki/On-base_plus_slugging">
+                On Base Percentage Plus Slugging Percentage</a></td>
+            </tr>
+            <tr>
+              <th scope="row">R</th>
+              <td>Runs</td>
+            </tr>
+            <tr>
+              <th scope="row">RBI</th>
+              <td>Runs Batted In</td>
+            </tr>
+            <tr>
+              <th scope="row">SB</th>
+              <td>Stolen Bases</td>
+            </tr>
+            <tr>
+              <th scope="row">SLG</th>
+              <td><a href="https://en.wikipedia.org/wiki/Slugging_percentage">
+                On Base Percentage Plus Slugging Percentage</a></td>
+            </tr>
+            <tr>
+              <th scope="row">SO</th>
+              <td>Strike Outs</td>
+            </tr>
+        </table>
+      </div>
+      <h2>Player Position Abbreviations</h2>
+      <div class="table-responsive">
+        <table class="table table-sm table-hover table-dark text-center">
+          <thead>
+            <tr>
+              <th scope="col">Abbreviation</th>
+              <th scope="col">Meaning</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1B</th>
+              <td>First Base</td>
+            </tr>
+            <tr>
+              <th scope="row">2B</th>
+              <td>Second Base</td>
+            </tr>
+            <tr>
+              <th scope="row">3B</th>
+              <td>Third Base</td>
+            </tr>
+            <tr>
+              <th scope="row">SS</th>
+              <td>Shortstop</td>
+            </tr>
+            <tr>
+              <th scope="row">LF</th>
+              <td>Left Field</td>
+            </tr>
+            <tr>
+              <th scope="row">CF</th>
+              <td>Center Field</td>
+            </tr>
+            <tr>
+              <th scope="row">RF</th>
+              <td>Right Field</td>
+            </tr>
+            <tr>
+              <th scope="row">P</th>
+              <td>Pitcher</td>
+            </tr>
+            <tr>
+              <th scope="row">C</th>
+              <td>Catcher</td>
+            </tr>
+            <tr>
+              <th scope="row">DH</th>
+              <td><a href="https://en.wikipedia.org/wiki/Designated_hitter">
+                Designated Hitter</a></td>
+            </tr>
+        </table>
+      </div>
+    </div>
   </body>
 </html>

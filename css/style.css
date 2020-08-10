@@ -30,17 +30,13 @@ body{
    
 .link {
      align-content: flex-end;
-    /* border-radius: 3px;
-     padding: 3%;*/
      text-decoration: none;
 }
 
 .link a {
   color: white;
 }
-
-
-   
+ 
 .dropdown-item {
      color: rgb(105, 100, 103);
 }
@@ -55,18 +51,15 @@ body{
 }
 
 #active {
-  /* background-color: whitesmoke; */
   text-align: center;
 }
 
 #retired {
-  /* background-color: whitesmoke; */
   color: grey;
   text-align: center;
 }
 
 #missing {
-  /* background-color: whitesmoke; */
   color: crimson;
   text-align: center;
 }
@@ -76,18 +69,14 @@ body{
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 1%;
-  /* width: 50%; */
 }
 
 #dropDownList {
-  /* align-content: center;
-  display: inline-block; */
   text-align: right;
   float: center;
   text-align:center;
   margin-right: auto;
   margin-left:auto;
-  /* float: center; */
 }
 
 .smaller-font{
@@ -120,3 +109,6 @@ body{
   margin: 1%;
 }
 
+h2 {
+  text-align: center;
+}

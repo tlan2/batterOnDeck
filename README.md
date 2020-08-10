@@ -1,5 +1,5 @@
 # Batter On Deck
-Major League Baseball (MLB) dashboard containing player's individual season and career stats using the [MLB Data API](https://appac.github.io/mlb-data-api-docs/). Search for player by name and see how they compare to other players with our novel 5-Baseball ranking system!
+Major League Baseball (MLB) dashboard containing player's individual season and career stats using the [MLB Data API](https://appac.github.io/mlb-data-api-docs/). Search for player by name and see all their relevant positional stats!
 
 Created by Tom Lancaster and [Pat Rademacher](https://github.com/PatRademacher) for our Summer 2020 Front End Web Technology course taught by Caterina Paun.
 
