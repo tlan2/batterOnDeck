@@ -397,7 +397,7 @@ if(position == "P"){
                               ${rbi}
 
                               </div>
-                              <img src="images/two_balls.png" align-content="flex-end" width="150px" float="center" display="flex">
+                              <img src="images/two_balls.png" align-content="flex-end" width="80%" float="center" display="flex">
 
                             </div>
                           </div>
