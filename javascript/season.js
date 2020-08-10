@@ -6,7 +6,6 @@
 function searchByPlayerName(event){
   clearPlayerInfo();
   var inputPlayer = document.getElementById('getPlayer').value;
-  console.log(inputPlayer);
   fetchAllPlayerInfo(inputPlayer);
   event.preventDefault();
 }
@@ -28,12 +27,9 @@ function fetchAllPlayerInfo(name){
      return response.json();
    })
    .then(function(data){
-       console.log("activePlayerInfo", data);
        var totalSize = data.search_player_all.queryResults.totalSize;
-       console.log("Active totalSize = " + data.search_player_all.queryResults.totalSize);
 
        if(data.search_player_all.queryResults.totalSize == 0){
-             console.log("Not active.")
              fetchRetiredPlayerInfo(urlName);
        } else {
                  const id = data.search_player_all.queryResults.row.player_id;
@@ -44,8 +40,6 @@ function fetchAllPlayerInfo(name){
 
                  var firstYear = firstYear.substring(0,4);
 
-                 console.log(firstYear)
-
                  var dropDownList = createDropDownListActive(firstYear);
 
 
@@ -53,9 +47,6 @@ function fetchAllPlayerInfo(name){
                                  <h1 id="active">${name} - ${position}</h1>
                                  <h2 id="active">${team}</h2>
                                   `;
-
-                 console.log(name);
-                 console.log(position);
          
                  document.getElementById('nameResult').innerHTML = player + dropDownList;
 
@@ -79,8 +70,6 @@ function fetchAllPlayerInfo(name){
 function fetchRetiredPlayerInfo(urlName){
 // Returns RETIRED players PERSONAL info including ID
 
- console.log("retired player fetch.")
-
  fetch(`https://mlb-data.p.rapidapi.com/json/named.search_player_all.bam?active_sw='N'&sport_code='mlb'&name_part='${urlName}'`, {
  "method": "GET",
  "headers": {
@@ -92,32 +81,22 @@ function fetchRetiredPlayerInfo(urlName){
      return response.json();
    })
    .then(function (retiredData){
-       console.log("retiredData", retiredData);
        var totalSize = retiredData.search_player_all.queryResults.totalSize;
-       console.log("Retired totalSize = " + totalSize);
      
        if(totalSize == "0"){
-         console.log("in totalSize condition");
          document.getElementById('nameResult').innerHTML = playerDoesNotExist();
          return;
 
        } else if(totalSize > 1){
-         console.log("More than 1 player with same name.");
 
          const id = retiredData.search_player_all.queryResults.row['0'].player_id;
-
-         console.log("first id of 2 players = " + id);
          
          fetchPlayerByID(id);
 
        } else {
-         console.log("Retired Player stats retrieval.");
 
          const id = retiredData.search_player_all.queryResults.row.player_id;
- 
-         console.log("retired id = " + id);
-     
-   
+        
          fetchPlayerByID(id);
        }
  
@@ -141,10 +120,7 @@ function fetchPlayerByID(id){
      return response.json();
    })
    .then(function(data){
-           console.log("fetchPlayerByID-data", data)
-
-
-
+           
            const name = data.player_info.queryResults.row.name_display_first_last;
            const position = data.player_info.queryResults.row.primary_position_txt;
            const team = data.player_info.queryResults.row.team_name;
@@ -152,12 +128,7 @@ function fetchPlayerByID(id){
            var lastYear = data.player_info.queryResults.row.end_date;
            firstYear = firstYear.substring(0,4);
            lastYear = lastYear.substring(0,4);
-
-           console.log("retired-firstYear = " + firstYear);
-           console.log("retired-lastYear = " + lastYear);
-           console.log(typeof firstYear);
-           console.log(typeof lastYear);
-   
+              
            const html = `<h1 id="retired">${name} - ${position}</h1>
                          <h2 id="retired">${team}</h2>
                          `;
@@ -181,10 +152,8 @@ function fetchPlayerByID(id){
 
 function fetchPlayerSeasonStats(id, position, year){
 // Fetches player's SEASON REGULAR SEASON STATS
-console.log("position = " + position);
 
 if(position == "P"){
- console.log("PITCHER season stats");
  fetch(`https://mlb-data.p.rapidapi.com/json/named.sport_pitching_tm.bam?season='${year}'&player_id='${id}'&league_list_id='mlb'&game_type='R'`, {
          "method": "GET",
          "headers": {
@@ -196,7 +165,6 @@ if(position == "P"){
    return response.json();
  })
  .then(function(seasonData){
-         console.log("PITCHER seasonData", seasonData)
 
          document.getElementById('stats').innerHTML = "";
 
@@ -302,7 +270,6 @@ if(position == "P"){
    console.log(err);
  });
 } else {
-   console.log("HITTER season stats");
    fetch(`https://mlb-data.p.rapidapi.com/json/named.sport_hitting_tm.bam?season='${year}'&player_id='${id}'&league_list_id='mlb'&game_type='R'`, {
          "method": "GET",
          "headers": {
@@ -314,7 +281,6 @@ if(position == "P"){
      return response.json();
    })
    .then(function(seasonData){
-           console.log("HITTER seasonData", seasonData)
 
            document.getElementById('stats').innerHTML = "";
 
@@ -412,7 +378,6 @@ if(position == "P"){
 
 function convertToURlName(inputName){
    var urlName = inputName.toLowerCase().trim().replace(' ', '+');
-   // console.log(urlName);
    return urlName;
 }
 
@@ -420,7 +385,6 @@ function createDropDownListActive(startYear){
    var firstYear = parseInt(startYear);
    var currentYear = new Date().getFullYear();
    var yearDiff = currentYear - firstYear;
-   console.log(yearDiff);
    
    var html = `<div id="dropDownList">
                  <label for="season">Season:
@@ -428,7 +392,6 @@ function createDropDownListActive(startYear){
                  <select id="season">`; //onchange="refetchSeasonStats(this.value);"
 
    for(i=currentYear; i >= firstYear; i--){
-     console.log(i);
      var option = `
                    <option value="${i}">
                    <label for="${i}">${i}</label>
@@ -448,7 +411,6 @@ function createDropDownListRetired(startYear, endYear){
  var firstYear = parseInt(startYear);
  var lastYear = parseInt(endYear);
  var yearDiff = lastYear - firstYear;
- console.log("Total # of years played: " + yearDiff);
  
  var html = `<div id="dropDownList">
                <label for="season">Season:
@@ -456,7 +418,6 @@ function createDropDownListRetired(startYear, endYear){
                <select id="season">`;
 
  for(i=lastYear; i >= firstYear; i--){
-   console.log(i);
    var option = `
                  <option value="${i}">
                  <label for="${i}">${i}</label>
