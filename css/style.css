@@ -11,25 +11,38 @@ body{
   background-size: cover;
 }
 
+
+
 .navbar {
     /* background-color: rgb(51, 67, 116); */
     background-color: #083b66;
-    color: white;
+    color: #ffffff;
+    height: 90px;
+    font-size: 15px;
+
+}
+
+.container{
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 }
    
 .link {
      align-content: flex-end;
-     border-radius: 3px;
-     padding: 3%;
+    /* border-radius: 3px;
+     padding: 3%;*/
      text-decoration: none;
 }
 
 .link a {
   color: white;
 }
+
+
    
 .dropdown-item {
-     color: greenyellow;
+     color: rgb(105, 100, 103);
 }
 
 #home{
@@ -69,21 +82,34 @@ body{
 #dropDownList {
   /* align-content: center;
   display: inline-block; */
-  text-align: center;
+  text-align: right;
+  float: center;
+  text-align:center;
+  margin-right: auto;
+  margin-left:auto;
   /* float: center; */
 }
 
-.row > div {
-  background-color: cornsilk;
-  border: solid 1px black;
-  border-radius: 7px;
-  font-size: 1.5em;
-  font-weight: bold;
-  /* padding: 5%; */
-  /* margin: 0% 0.5% 0% 0.5%; */
-  padding: 0.5% 0% 3% 1%;
-  text-align: center;
-  width: 8%;
+.smaller-font{
+  font-size:1.3vw;
+}
+
+.larger-font{
+  font-size:4.0vw;
+  margin-bottom: -10%;
+}
+
+
+.row-grid, .row-grid + .row-grid{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.stats{
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  width: 75%;
 }
 
 .container {
@@ -93,3 +119,4 @@ body{
 #api > img {
   margin: 1%;
 }
+
