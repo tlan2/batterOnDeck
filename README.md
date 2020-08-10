@@ -3,8 +3,6 @@ Major League Baseball (MLB) dashboard containing player's individual season and 
 
 Created by Tom Lancaster and [Pat Rademacher](https://github.com/PatRademacher) for our Summer 2020 Front End Web Technology course taught by Caterina Paun.
 
-![home page](images/home.png)
-
 ## Website Links
 [batter-on-deck.herokuapp.com/home.html] (http://batter-on-deck.herokuapp.com/home.html)
 
