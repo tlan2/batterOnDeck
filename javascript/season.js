@@ -371,10 +371,9 @@ if(position == "P"){
 // Searches for inputted player when user presses "Enter"
 // https://stackoverflow.com/questions/12955222/how-to-trigger-html-button-when-you-press-enter-in-textbox
  document.querySelector("#nameResult").addEventListener("keyup", event => {
-   if(event.key !== "Enter") return; // Use `.key` instead.
-   document.querySelector("#nameResult").click(); // Things you want to do.
-   event.preventDefault(); // No need to `return false;`.
-});
+   if(event.key !== "Enter") return; 
+   document.querySelector("#nameResult").click(); 
+   event.preventDefault();
 
 function convertToURlName(inputName){
    var urlName = inputName.toLowerCase().trim().replace(' ', '+');
