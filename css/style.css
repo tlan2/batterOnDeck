@@ -114,7 +114,7 @@ body{
   margin-bottom: 10px;
 }
 
-.stats{
+#stats{
   margin-bottom: 2%;
   margin-left: auto;
   margin-right: auto;
@@ -134,16 +134,7 @@ body{
   width: 80%;
 }
 
-#stats {
-  background-color: #ffffff;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 1%;
-  opacity: 95%;
-  padding-bottom: 1%;
-  padding-top: 1%;
-  width: 80%;
-}
+
 
 #api > img {
   margin: 1%;
